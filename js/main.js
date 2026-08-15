@@ -2,6 +2,11 @@
 (function () {
   'use strict';
 
+  var SUPABASE_URL = 'https://xpikyrtjmueeyqrpfoox.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_l9O6G5ldcwcYixVOn1Xq9w_kJjdgCsg';
+  var VYPRAVA_SLUG = 'maroko-2026';
+  var VYPRAVA_ID = '79cca540-5dd4-4096-ad5a-c1c5b2290e07';
+
   var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -98,8 +103,12 @@
   var leadForm = document.getElementById('lead-form');
   var leadSent = document.getElementById('lead-sent');
 
-  function showLeadSent() {
+  function showLeadSent(vs, zalohaKc) {
     if (!leadForm || !leadSent) return;
+    var vsEl = document.getElementById('pay-vs');
+    var amountEl = document.getElementById('pay-amount');
+    if (vsEl) vsEl.textContent = vs || 'SDĚLÍME TELEFONICKY';
+    if (amountEl && zalohaKc) amountEl.textContent = zalohaKc.toLocaleString('cs-CZ') + ' KČ';
     leadForm.hidden = true;
     leadSent.hidden = false;
   }
@@ -115,21 +124,57 @@
     var email = document.getElementById('lead-email').value;
     var note = document.getElementById('lead-note').value;
     var gdpr = document.getElementById('lead-gdpr').checked;
+    var podminky = document.getElementById('lead-podminky').checked;
+    var submitBtn = document.getElementById('lead-submit');
 
     var ok = true;
-    if (!note.trim()) { setErr('err-note', 'Napište nám dotaz, ať se na telefonát připravíme.'); ok = false; } else setErr('err-note');
     if (!name.trim()) { setErr('err-name', 'Doplňte jméno.'); ok = false; } else setErr('err-name');
     if (!phone.trim()) { setErr('err-phone', 'Doplňte telefon, bez něj se vám nedovoláme.'); ok = false; } else setErr('err-phone');
-    if (email.trim() && !EMAIL_RE.test(email)) { setErr('err-email', 'Zkontrolujte e-mail, má být ve tvaru jmeno@domena.cz.'); ok = false; } else setErr('err-email');
+    if (!EMAIL_RE.test(email)) { setErr('err-email', 'Doplňte e-mail, pošleme na něj smlouvu a podklady.'); ok = false; } else setErr('err-email');
     if (!gdpr) { setErr('err-gdpr', 'Potvrďte prosím souhlas se zpracováním údajů.'); ok = false; } else setErr('err-gdpr');
+    if (!podminky) { setErr('err-podminky', 'Potvrďte prosím souhlas s obchodními podmínkami.'); ok = false; } else setErr('err-podminky');
     if (!ok) return;
 
-    try {
-      localStorage.setItem('cd-maroko-lead', JSON.stringify({
-        ts: Date.now(), name: name, phone: phone, email: email, note: note, gdpr: gdpr
-      }));
-    } catch (err) {}
-    showLeadSent();
+    var parts = name.trim().split(/\s+/);
+    var prijmeni = parts.length > 1 ? parts.pop() : null;
+    var jmeno = parts.join(' ');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Odesílám…';
+    setErr('err-submit');
+
+    fetch(SUPABASE_URL + '/rest/v1/rpc/podat_prihlasku', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        p_slug: VYPRAVA_SLUG,
+        p_jmeno: jmeno,
+        p_prijmeni: prijmeni,
+        p_email: email.trim(),
+        p_telefon: phone.trim(),
+        p_zprava: note.trim() || null,
+        p_souhlas_gdpr: gdpr,
+        p_souhlas_podminky: podminky
+      })
+    }).then(function (res) {
+      if (!res.ok) throw new Error('http ' + res.status);
+      return res.json();
+    }).then(function (data) {
+      try {
+        localStorage.setItem('cd-maroko-lead', JSON.stringify({
+          ts: Date.now(), vs: data.vs, zaloha_kc: data.zaloha_kc
+        }));
+      } catch (err) {}
+      showLeadSent(data.vs, data.zaloha_kc);
+    }).catch(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Chci jet';
+      setErr('err-submit', 'Odeslání se nepovedlo. Zkuste to prosím znovu, nebo volejte +420 702 967 187.');
+    });
   });
 
   /* ---------- program v PDF ---------- */
@@ -153,14 +198,34 @@
       return;
     }
     pdfErr.textContent = '';
-    try { localStorage.setItem('cd-maroko-pdf', email); } catch (err) {}
-    showPdfSent();
+
+    fetch(SUPABASE_URL + '/rest/v1/zajemci_pdf', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email: email.trim().toLowerCase(), vyprava_id: VYPRAVA_ID })
+    }).then(function (res) {
+      if (!res.ok) throw new Error('http ' + res.status);
+      try { localStorage.setItem('cd-maroko-pdf', email); } catch (err) {}
+      showPdfSent();
+    }).catch(function () {
+      pdfErr.textContent = 'Odeslání se nepovedlo. Zkuste to prosím znovu.';
+    });
   });
 
   /* ---------- obnovení stavu ---------- */
 
   try {
-    if (localStorage.getItem('cd-maroko-lead')) showLeadSent();
+    var savedLead = localStorage.getItem('cd-maroko-lead');
+    if (savedLead) {
+      var lead = {};
+      try { lead = JSON.parse(savedLead) || {}; } catch (err) {}
+      showLeadSent(lead.vs, lead.zaloha_kc);
+    }
     if (localStorage.getItem('cd-maroko-pdf')) showPdfSent();
   } catch (err) {}
 

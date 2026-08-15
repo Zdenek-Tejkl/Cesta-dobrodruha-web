@@ -6,7 +6,7 @@ Landing page výpravy „Maroko 2026" postavená podle grafického návrhu „Ma
 
 - `index.html` – celá stránka (jedna page, sekce pod sebou, kotvy `#program`, `#cena`, `#zaloha`, `#otazky`, `#formular`)
 - `css/styles.css` – design tokeny značky (Písek, Uhel, Terakota, Hlubina, Kámen) a styly sekcí
-- `js/main.js` – navigace, kreslení trasy při scrollu, akordeon otázek, validace formulářů, sticky lišta na mobilu
+- `js/main.js` – navigace, kreslení trasy při scrollu, akordeon otázek, validace formulářů, sticky lišta na mobilu; dotazník a e-maily na program se ukládají do Supabase (projekt `cesta-dobrodruha`, RPC `podat_prihlasku` + tabulka `zajemci_pdf`)
 - `assets/` – fotografie z vlastní cesty
 
 ## Spuštění
@@ -22,7 +22,7 @@ a otevřít http://localhost:8000.
 ## Před spuštěním doplnit
 
 - pořádající cestovní kancelář a její pojištění pro případ úpadku (placeholdery `[DOPLNIT]` v patičce, ve `vop.html` a v `ochrana-osobnich-udaju.html`; web běží v režimu cestovní agentury, IČO 19804962)
-- jména, medailonky a fotky obou průvodců
+- fotky obou průvodců (medailonky už jsou doplněné)
+- číslo účtu pro zálohu (placeholder `[DOPLNIT]` v platebních údajích po odeslání dotazníku a ve `vop.html`)
 - odkazy na Instagram a Facebook
-- napojení formulářů na backend nebo formulářovou službu (`js/main.js`, dnes ukládají odeslání jen do `localStorage`)
 - právní texty (`vop.html`, `ochrana-osobnich-udaju.html`) jsou pracovní návrh; před spuštěním nechat zkontrolovat právníkem

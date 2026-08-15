@@ -521,6 +521,11 @@ textarea.input { resize: vertical; }
   margin: clamp(28px, 4vw, 44px) auto 0;
 }
 
+.program__cta {
+  text-align: center;
+  margin-top: clamp(20px, 3vw, 32px);
+}
+
 /* časová osa */
 
 .timeline {
@@ -1143,6 +1148,22 @@ textarea.input { resize: vertical; }
   gap: 12px;
   justify-items: start;
 }
+
+.pay-box {
+  justify-self: stretch;
+  border: 1px solid rgba(110, 101, 92, 0.55);
+  border-radius: var(--cd-radius);
+  padding: 14px 16px;
+  display: grid;
+  gap: 6px;
+  font-family: var(--cd-font-mono);
+  font-size: 13.5px;
+  letter-spacing: 0.05em;
+  color: var(--cd-uhel);
+  background: var(--cd-pisek);
+}
+
+.pay-box strong { font-weight: 500; color: var(--cd-terakota-tmava); }
 
 .final__sent h3 {
   font-family: var(--cd-font-display);
