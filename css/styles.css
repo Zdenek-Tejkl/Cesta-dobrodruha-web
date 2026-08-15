@@ -499,6 +499,12 @@ textarea.input { resize: vertical; }
   background: #2b2620;
 }
 
+@media (max-width: 767px) {
+  /* na mobilu fotka nahoře, popisky pod ní (dle zadání webu) */
+  .contrast__pair > .contrast__img,
+  .contrast__pair > .contrast__media { order: -1; }
+}
+
 /* ---------- program ---------- */
 
 .program {
