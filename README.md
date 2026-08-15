@@ -1,4 +1,4 @@
-# CK Cesta dobrodruha · Maroko 2026
+# CA Cesta dobrodruha · Maroko 2026
 
 Landing page výpravy „Maroko 2026" postavená podle grafického návrhu „Maroko Landing v3" (Claude Design) a brand manuálu v1.0.
 
@@ -21,7 +21,7 @@ a otevřít http://localhost:8000.
 
 ## Před spuštěním doplnit
 
-- IČO, pojišťovna a číslo pojistky v patičce (placeholdery `[DOPLNIT]`)
+- pořádající cestovní kancelář a její pojištění pro případ úpadku v patičce (placeholdery `[DOPLNIT]`; web běží v režimu cestovní agentury, IČO 19804962)
 - jména, medailonky a fotky obou průvodců
 - fotka „ruce s kladívkem a fosilií" v sekci Dobrodruzi, ne turisté
 - odkazy: doklad o pojištění (PDF), VOP, ochrana osobních údajů, Instagram, Facebook

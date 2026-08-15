@@ -1,4 +1,4 @@
-/* CK Cesta dobrodruha, landing Maroko 2026 */
+/* CA Cesta dobrodruha, landing Maroko 2026 */
 (function () {
   'use strict';
 
