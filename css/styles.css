@@ -439,23 +439,43 @@ textarea.input { resize: vertical; }
   color: rgba(243, 237, 226, 0.85);
 }
 
-.contrast__list {
-  display: grid;
-  gap: clamp(36px, 5vw, 56px);
-  margin-top: clamp(36px, 5vw, 56px);
+.contrast__table {
+  margin-top: clamp(32px, 4vw, 48px);
+  border-top: 1px solid rgba(168, 158, 147, 0.25);
 }
 
-.contrast__pair {
+.contrast__row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: 28px;
+  grid-template-columns: 1fr 96px 1fr;
   align-items: center;
+  gap: 8px;
+  padding: clamp(20px, 3vw, 28px) 0;
+  border-bottom: 1px solid rgba(168, 158, 147, 0.25);
 }
 
-.contrast__labels {
+.contrast__arrow {
   display: grid;
-  gap: 18px;
-  align-content: center;
+  place-content: center;
+  color: var(--cd-terakota);
+}
+
+.contrast__cell p {
+  margin: 10px 0 0;
+  font-size: 17px;
+}
+
+.contrast__cell--tourist p { color: rgba(243, 237, 226, 0.6); }
+.contrast__cell--us p { color: var(--cd-pisek); }
+
+@media (max-width: 767px) {
+  .contrast__row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    justify-items: start;
+  }
+
+  .contrast__arrow { justify-self: center; }
+  .contrast__arrow svg { transform: rotate(90deg); }
 }
 
 .tag--tourist {
@@ -471,38 +491,6 @@ textarea.input { resize: vertical; }
   background: rgba(180, 80, 30, 0.18);
   font-size: 12.5px;
   letter-spacing: 0.06em;
-}
-
-.contrast__tourist {
-  margin: 10px 0 0;
-  font-size: 17px;
-  color: rgba(243, 237, 226, 0.6);
-}
-
-.contrast__us {
-  margin: 10px 0 0;
-  font-size: 17px;
-  color: var(--cd-pisek);
-}
-
-.contrast__img {
-  width: 100%;
-  aspect-ratio: 3/2;
-  object-fit: cover;
-  border-radius: var(--cd-radius);
-}
-
-.contrast__media {
-  aspect-ratio: 3/2;
-  border-radius: var(--cd-radius);
-  overflow: hidden;
-  background: #2b2620;
-}
-
-@media (max-width: 767px) {
-  /* na mobilu fotka nahoře, popisky pod ní (dle zadání webu) */
-  .contrast__pair > .contrast__img,
-  .contrast__pair > .contrast__media { order: -1; }
 }
 
 /* ---------- program ---------- */
@@ -633,7 +621,7 @@ textarea.input { resize: vertical; }
 .pdf__inner {
   max-width: 720px;
   margin: 0 auto;
-  padding: 0 24px clamp(64px, 9vw, 112px);
+  padding: clamp(48px, 7vw, 96px) 24px clamp(64px, 9vw, 112px);
 }
 
 .pdf__card { padding: clamp(24px, 3.5vw, 36px); }

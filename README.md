@@ -23,7 +23,6 @@ a otevřít http://localhost:8000.
 
 - pořádající cestovní kancelář a její pojištění pro případ úpadku (placeholdery `[DOPLNIT]` v patičce, ve `vop.html` a v `ochrana-osobnich-udaju.html`; web běží v režimu cestovní agentury, IČO 19804962)
 - jména, medailonky a fotky obou průvodců
-- fotka „ruce s kladívkem a fosilií" v sekci Dobrodruzi, ne turisté
 - odkazy na Instagram a Facebook
 - napojení formulářů na backend nebo formulářovou službu (`js/main.js`, dnes ukládají odeslání jen do `localStorage`)
 - právní texty (`vop.html`, `ochrana-osobnich-udaju.html`) jsou pracovní návrh; před spuštěním nechat zkontrolovat právníkem
