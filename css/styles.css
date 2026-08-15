@@ -1082,6 +1082,11 @@ textarea.input { resize: vertical; }
   color: rgba(243, 237, 226, 0.88);
 }
 
+.final__text a { color: var(--cd-pisek); }
+.final__text a:hover { color: var(--cd-terakota); }
+
+.final--page { padding-top: var(--nav-h); min-height: calc(100vh - var(--nav-h)); box-sizing: border-box; }
+
 .final__badge {
   display: inline-block;
   margin-top: 24px;

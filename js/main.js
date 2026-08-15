@@ -177,6 +177,65 @@
     });
   });
 
+  /* ---------- dotaz (zavolejte mi) ---------- */
+
+  var dotazForm = document.getElementById('dotaz-form');
+  var dotazSent = document.getElementById('dotaz-sent');
+
+  function showDotazSent() {
+    if (!dotazForm || !dotazSent) return;
+    dotazForm.hidden = true;
+    dotazSent.hidden = false;
+  }
+
+  if (dotazForm) dotazForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var dotaz = document.getElementById('dotaz-text').value;
+    var name = document.getElementById('dotaz-name').value;
+    var phone = document.getElementById('dotaz-phone').value;
+    var email = document.getElementById('dotaz-email').value;
+    var gdpr = document.getElementById('dotaz-gdpr').checked;
+    var submitBtn = document.getElementById('dotaz-submit');
+
+    var ok = true;
+    if (!dotaz.trim()) { setErr('err-d-text', 'Napište nám dotaz, ať se na telefonát připravíme.'); ok = false; } else setErr('err-d-text');
+    if (!name.trim()) { setErr('err-d-name', 'Doplňte jméno.'); ok = false; } else setErr('err-d-name');
+    if (!phone.trim()) { setErr('err-d-phone', 'Doplňte telefon, bez něj se vám nedovoláme.'); ok = false; } else setErr('err-d-phone');
+    if (email.trim() && !EMAIL_RE.test(email)) { setErr('err-d-email', 'Zkontrolujte e-mail, má být ve tvaru jmeno@domena.cz.'); ok = false; } else setErr('err-d-email');
+    if (!gdpr) { setErr('err-d-gdpr', 'Potvrďte prosím souhlas se zpracováním údajů.'); ok = false; } else setErr('err-d-gdpr');
+    if (!ok) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Odesílám…';
+    setErr('err-d-submit');
+
+    fetch(SUPABASE_URL + '/rest/v1/dotazy', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        vyprava_id: VYPRAVA_ID,
+        jmeno: name.trim(),
+        telefon: phone.trim(),
+        email: email.trim() ? email.trim().toLowerCase() : null,
+        dotaz: dotaz.trim(),
+        souhlas_gdpr: gdpr
+      })
+    }).then(function (res) {
+      if (!res.ok) throw new Error('http ' + res.status);
+      try { localStorage.setItem('cd-maroko-dotaz', String(Date.now())); } catch (err) {}
+      showDotazSent();
+    }).catch(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Zavolejte mi';
+      setErr('err-d-submit', 'Odeslání se nepovedlo. Zkuste to prosím znovu, nebo volejte +420 702 967 187.');
+    });
+  });
+
   /* ---------- program v PDF ---------- */
 
   var pdfForm = document.getElementById('pdf-form');
@@ -226,6 +285,7 @@
       try { lead = JSON.parse(savedLead) || {}; } catch (err) {}
       showLeadSent(lead.vs, lead.zaloha_kc);
     }
+    if (localStorage.getItem('cd-maroko-dotaz')) showDotazSent();
     if (localStorage.getItem('cd-maroko-pdf')) showPdfSent();
   } catch (err) {}
 

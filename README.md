@@ -4,9 +4,10 @@ Landing page výpravy „Maroko 2026" postavená podle grafického návrhu „Ma
 
 ## Struktura
 
-- `index.html` – celá stránka (jedna page, sekce pod sebou, kotvy `#program`, `#cena`, `#zaloha`, `#otazky`, `#formular`)
+- `index.html` – hlavní stránka (sekce pod sebou, kotvy `#program`, `#cena`, `#zaloha`, `#otazky`, `#formular`); dole formulář „Zavolejte mi" pro dotazy
+- `chci-jet.html` – samostatná stránka s přihláškou (dotazník + platební údaje k záloze), vedou na ni všechna tlačítka Chci jet
 - `css/styles.css` – design tokeny značky (Písek, Uhel, Terakota, Hlubina, Kámen) a styly sekcí
-- `js/main.js` – navigace, kreslení trasy při scrollu, akordeon otázek, validace formulářů, sticky lišta na mobilu; dotazník a e-maily na program se ukládají do Supabase (projekt `cesta-dobrodruha`, RPC `podat_prihlasku` + tabulka `zajemci_pdf`)
+- `js/main.js` – navigace, kreslení trasy při scrollu, akordeon otázek, validace formulářů, sticky lišta na mobilu; formuláře se ukládají do Supabase (projekt `cesta-dobrodruha`): přihláška přes RPC `podat_prihlasku`, dotazy do tabulky `dotazy`, e-maily na program do `zajemci_pdf`
 - `assets/` – fotografie z vlastní cesty
 
 ## Spuštění
