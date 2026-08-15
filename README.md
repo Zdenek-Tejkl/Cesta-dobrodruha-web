@@ -21,8 +21,9 @@ a otevřít http://localhost:8000.
 
 ## Před spuštěním doplnit
 
-- pořádající cestovní kancelář a její pojištění pro případ úpadku v patičce (placeholdery `[DOPLNIT]`; web běží v režimu cestovní agentury, IČO 19804962)
+- pořádající cestovní kancelář a její pojištění pro případ úpadku (placeholdery `[DOPLNIT]` v patičce, ve `vop.html` a v `ochrana-osobnich-udaju.html`; web běží v režimu cestovní agentury, IČO 19804962)
 - jména, medailonky a fotky obou průvodců
 - fotka „ruce s kladívkem a fosilií" v sekci Dobrodruzi, ne turisté
-- odkazy: doklad o pojištění (PDF), VOP, ochrana osobních údajů, Instagram, Facebook
+- odkazy na Instagram a Facebook
 - napojení formulářů na backend nebo formulářovou službu (`js/main.js`, dnes ukládají odeslání jen do `localStorage`)
+- právní texty (`vop.html`, `ochrana-osobnich-udaju.html`) jsou pracovní návrh; před spuštěním nechat zkontrolovat právníkem

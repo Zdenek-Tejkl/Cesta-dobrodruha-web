@@ -50,6 +50,7 @@
   var formSection = document.getElementById('formular');
 
   function updateBar() {
+    if (!bar) return;
     var show = false;
     if (isMobile() && formSection) {
       var y = window.scrollY;
@@ -98,6 +99,7 @@
   var leadSent = document.getElementById('lead-sent');
 
   function showLeadSent() {
+    if (!leadForm || !leadSent) return;
     leadForm.hidden = true;
     leadSent.hidden = false;
   }
@@ -106,7 +108,7 @@
     document.getElementById(id).textContent = msg || '';
   }
 
-  leadForm.addEventListener('submit', function (e) {
+  if (leadForm) leadForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = document.getElementById('lead-name').value;
     var phone = document.getElementById('lead-phone').value;
@@ -138,11 +140,12 @@
   var pdfErr = document.getElementById('pdf-err');
 
   function showPdfSent() {
+    if (!pdfIdle || !pdfSentBox) return;
     pdfIdle.hidden = true;
     pdfSentBox.hidden = false;
   }
 
-  pdfForm.addEventListener('submit', function (e) {
+  if (pdfForm) pdfForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var email = document.getElementById('pdf-email').value;
     if (!EMAIL_RE.test(email)) {
