@@ -115,9 +115,10 @@
     var gdpr = document.getElementById('lead-gdpr').checked;
 
     var ok = true;
+    if (!note.trim()) { setErr('err-note', 'Napište nám dotaz, ať se na telefonát připravíme.'); ok = false; } else setErr('err-note');
     if (!name.trim()) { setErr('err-name', 'Doplňte jméno.'); ok = false; } else setErr('err-name');
     if (!phone.trim()) { setErr('err-phone', 'Doplňte telefon, bez něj se vám nedovoláme.'); ok = false; } else setErr('err-phone');
-    if (!EMAIL_RE.test(email)) { setErr('err-email', 'Zkontrolujte e-mail, má být ve tvaru jmeno@domena.cz.'); ok = false; } else setErr('err-email');
+    if (email.trim() && !EMAIL_RE.test(email)) { setErr('err-email', 'Zkontrolujte e-mail, má být ve tvaru jmeno@domena.cz.'); ok = false; } else setErr('err-email');
     if (!gdpr) { setErr('err-gdpr', 'Potvrďte prosím souhlas se zpracováním údajů.'); ok = false; } else setErr('err-gdpr');
     if (!ok) return;
 

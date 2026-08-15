@@ -439,13 +439,13 @@
     <div class="deposit__steps">
       <div class="deposit__step">
         <span class="deposit__num">01</span>
-        <h3>Formulář a záloha</h3>
-        <p>Vyplníte formulář a zaplatíte zálohu 25 000 Kč. Platební údaje vám pošleme e-mailem hned po odeslání.</p>
+        <h3>Formulář a telefonát</h3>
+        <p>Zanecháte nám dotaz a telefon. Do 24 hodin zavoláme, projdeme vaše otázky a na rovinu si řekneme, jestli vám výprava sedne.</p>
       </div>
       <div class="deposit__step">
         <span class="deposit__num">02</span>
-        <h3>Video hovor</h3>
-        <p>Zavoláme si přes video: upřesníme vaše požadavky a očekávání a sladíme skupinu tak, aby si sedla.</p>
+        <h3>Záloha</h3>
+        <p>Když se rozhodnete jet, pošleme vám e-mailem platební údaje. Záloha je 25 000 Kč a do 20. 9. ji vracíme celou, bez otázek.</p>
       </div>
       <div class="deposit__step">
         <span class="deposit__num">03</span>
@@ -573,7 +573,7 @@
   <div class="final__inner">
     <div>
       <h2 class="h2 final__title">Maroko. 28. října. Malá skupina.</h2>
-      <p class="final__text">Vyplňte formulář a do 24 hodin se ozveme s platebními údaji k záloze a termínem video hovoru. Nic tím neriskujete: záloha je do 20. 9. vratná v plné výši.</p>
+      <p class="final__text">Nechte nám dotaz a telefon. Do 24 hodin zavoláme, projdeme vaše otázky a na rovinu si řekneme, jestli vám výprava sedne. Telefonát k ničemu nezavazuje: záloha se platí až po něm a do 20. 9. je vratná v plné výši.</p>
       <span class="final__badge">ODLET PRAHA · 28. 10. 2026 · NÁVRAT 11. 11. 2026</span>
       <div class="final__route">
         <svg width="140" height="14" viewBox="0 0 140 14" fill="none" stroke="#B4501E" stroke-width="2" aria-hidden="true"><circle cx="7" cy="7" r="4"></circle><path d="M11.5 7 H132" stroke-linecap="round"></path><path d="M126 2.2 133.8 7 126 11.8" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -581,6 +581,11 @@
     </div>
     <div class="final__card">
       <form id="lead-form" novalidate>
+        <div class="field">
+          <label for="lead-note">Na co se chcete zeptat?</label>
+          <textarea id="lead-note" name="note" rows="3" class="input" placeholder="Napište cokoli, co vás o výpravě zajímá."></textarea>
+          <span class="form-error" id="err-note" role="alert"></span>
+        </div>
         <div class="field">
           <label for="lead-name">Jméno a příjmení</label>
           <input id="lead-name" name="name" type="text" autocomplete="name" class="input">
@@ -592,13 +597,9 @@
           <span class="form-error" id="err-phone" role="alert"></span>
         </div>
         <div class="field">
-          <label for="lead-email">E-mail</label>
+          <label for="lead-email">E-mail <span class="field__optional">(nepovinné)</span></label>
           <input id="lead-email" name="email" type="email" autocomplete="email" class="input">
           <span class="form-error" id="err-email" role="alert"></span>
-        </div>
-        <div class="field">
-          <label for="lead-note">Na co se chcete zeptat? <span class="field__optional">(nepovinné)</span></label>
-          <textarea id="lead-note" name="note" rows="2" class="input"></textarea>
         </div>
         <div class="field">
           <label class="field__consent">
@@ -613,7 +614,7 @@
       <div id="lead-sent" class="final__sent" hidden>
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1E4E5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
         <h3>Díky, ozveme se do 24 hodin.</h3>
-        <p>Zavoláme z čísla +420 702 967 187. Uložte si ho, ať víte, že jsme to my. E-mailem mezitím přijdou platební údaje k záloze a podrobný program.</p>
+        <p>Zavoláme z čísla +420 702 967 187. Uložte si ho, ať víte, že jsme to my. Projdeme vaše dotazy a domluvíme se, jak dál.</p>
       </div>
     </div>
   </div>
