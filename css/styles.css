@@ -1473,6 +1473,24 @@ textarea.input { resize: vertical; }
   color: var(--cd-terakota-tmava);
 }
 
+/* ---------- desktop: klidnější měřítko ---------- */
+
+@media (min-width: 1200px) {
+  body { font-size: 17px; }
+  .h2 { font-size: 34px; }
+  .hero__title { font-size: 58px; }
+  .hero__sub { font-size: 19px; max-width: 54ch; }
+  .hero__badge { font-size: 13px; }
+  .final__title { font-size: 38px; }
+  .price__new { font-size: 46px; }
+  .stop__body h3 { font-size: 22px; }
+  .stop__body p { font-size: 16.5px; }
+  .contrast__cell p { font-size: 16.5px; }
+  .program__map { max-width: 680px; }
+  .deposit__step p, .checklist li { font-size: 16.5px; }
+  :root { --section-pad: clamp(64px, 8vw, 108px); }
+}
+
 /* ---------- zpět nahoru ---------- */
 
 .to-top {
@@ -1527,8 +1545,8 @@ textarea.input { resize: vertical; }
 }
 
 @keyframes hero-zoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.08); }
+  from { transform: scale(1.12); }
+  to { transform: scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
