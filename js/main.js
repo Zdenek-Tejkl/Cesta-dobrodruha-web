@@ -20,6 +20,7 @@
   var menuOpen = false;
 
   function setMenu(open) {
+    if (!menu || !menuToggle) return;
     menuOpen = open;
     menu.hidden = !open;
     menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -27,11 +28,12 @@
   }
 
   function updateNav() {
+    if (!nav) return;
     var solid = window.scrollY > 50 || menuOpen;
     nav.classList.toggle('is-solid', solid);
   }
 
-  menuToggle.addEventListener('click', function () { setMenu(!menuOpen); });
+  if (menuToggle) menuToggle.addEventListener('click', function () { setMenu(!menuOpen); });
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-menu-close], #mobile-menu a'), function (el) {
     el.addEventListener('click', function () { if (menuOpen) setMenu(false); });
@@ -75,6 +77,59 @@
     if (menuOpen && !isMobile()) setMenu(false);
     onScroll();
   });
+
+  /* ---------- odhalování při scrollu ---------- */
+
+  (function initReveals() {
+    if (reduced || !('IntersectionObserver' in window)) return;
+
+    var toReveal = [];
+
+    function add(el, delay) {
+      el.classList.add('reveal');
+      if (delay) el.style.setProperty('--reveal-delay', delay + 'ms');
+      toReveal.push(el);
+    }
+
+    // hero: postupný nástup po načtení
+    ['.hero__brand', '.hero__badge', '.hero__title', '.hero__sub', '.hero__cta', '.hero__micro'].forEach(function (sel, i) {
+      var el = document.querySelector(sel);
+      if (el) add(el, i * 110);
+    });
+
+    // samostatné bloky
+    ['.eyebrow', '.h2', '.contrast__intro', '.program__intro', '.program__map', '.program__outro', '.program__cta',
+     '.pdf__card', '.stay__text', '.guides__story', '.price__head', '.price__principle', '.price__cta',
+     '.deposit__intro', '.deposit__note', '.fit__outro', '.final__card', '.apply__card', '.final__badge', '.final__text'
+    ].forEach(function (sel) {
+      Array.prototype.forEach.call(document.querySelectorAll(sel), function (el) {
+        if (!el.classList.contains('reveal')) add(el, 0);
+      });
+    });
+
+    // skupiny s odstupňovaným nástupem
+    ['.trust__item', '.contrast__row', '.stay__photos figure', '.guide', '.deposit__step',
+     '.fit__card', '.price__cols > div', '.faq__item'
+    ].forEach(function (sel) {
+      Array.prototype.forEach.call(document.querySelectorAll(sel), function (el, i) {
+        add(el, (i % 5) * 90);
+      });
+    });
+
+    // zastávky programu bez zpoždění (jsou pod sebou)
+    Array.prototype.forEach.call(document.querySelectorAll('.stop'), function (el) { add(el, 0); });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add('is-visible');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    toReveal.forEach(function (el) { io.observe(el); });
+  })();
 
   /* ---------- otázky a odpovědi ---------- */
 

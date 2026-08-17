@@ -14,44 +14,18 @@
 </head>
 <body>
 
-<header id="cd-nav" class="nav nav--page">
+<header class="nav nav--page">
   <div class="nav__inner">
-    <a href="index.html" class="nav__logo" data-menu-close aria-label="Cesta dobrodruha, zpět na hlavní stránku">
+    <a href="index.html" class="nav__logo" aria-label="Cesta dobrodruha, zpět na hlavní stránku">
       <svg width="34" height="12" viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="5" cy="6" r="3.1"></circle><path d="M8.1 6 H29" stroke-linecap="round"></path><path d="M25.5 2.5 30.5 6 25.5 9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       <span>CESTA DOBRODRUHA</span>
     </a>
-    <nav class="nav__links" aria-label="Hlavní navigace">
-      <a href="index.html#program">Program</a>
-      <a href="index.html#cena">Cena</a>
-      <a href="index.html#zaloha" class="nav__nowrap">Jak to probíhá</a>
-      <a href="index.html#otazky">Otázky</a>
-    </nav>
-    <div class="nav__mobile">
-      <button type="button" id="menu-toggle" class="nav__burger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
-        <svg width="18" height="14" viewBox="0 0 18 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M1 1h16M1 7h16M1 13h16"></path></svg>
-      </button>
-    </div>
   </div>
-  <nav id="mobile-menu" class="nav__menu" hidden aria-label="Mobilní navigace">
-    <a href="index.html#program" data-menu-close>Program</a>
-    <a href="index.html#cena" data-menu-close>Cena</a>
-    <a href="index.html#zaloha" data-menu-close>Jak to probíhá</a>
-    <a href="index.html#otazky" data-menu-close class="nav__menu-last">Otázky</a>
-  </nav>
 </header>
 
-<main>
-<section class="final final--page">
-  <div class="final__inner">
-    <div>
-      <h2 class="h2 final__title">Maroko. 28. října. Malá skupina.</h2>
-      <p class="final__text">Vyplňte dotazník, zabere dvě minuty. Hned po odeslání uvidíte platební údaje k záloze 25 000 Kč; do 20. 9. je vratná v plné výši. Máte-li ještě otázky, <a href="index.html#formular">nechte nám dotaz</a>, do 24 hodin zavoláme.</p>
-      <span class="final__badge">ODLET PRAHA · 28. 10. 2026 · NÁVRAT 11. 11. 2026</span>
-      <div class="final__route">
-        <svg width="140" height="14" viewBox="0 0 140 14" fill="none" stroke="#B4501E" stroke-width="2" aria-hidden="true"><circle cx="7" cy="7" r="4"></circle><path d="M11.5 7 H132" stroke-linecap="round"></path><path d="M126 2.2 133.8 7 126 11.8" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div class="final__card">
+<main class="apply">
+  <div class="apply__inner">
+    <div class="final__card apply__card">
       <form id="lead-form" novalidate>
         <div class="field">
           <label for="lead-name">Jméno a příjmení</label>
@@ -88,7 +62,6 @@
         </div>
         <button type="submit" id="lead-submit" class="btn btn--primary btn--block">Chci jet</button>
         <span class="form-error" id="err-submit" role="alert"></span>
-        <p class="final__micro">PO ODESLÁNÍ ZOBRAZÍME PLATEBNÍ ÚDAJE K ZÁLOZE · ŽÁDNÝ SPAM</p>
       </form>
       <div id="lead-sent" class="final__sent" hidden>
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1E4E5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
@@ -103,7 +76,6 @@
       </div>
     </div>
   </div>
-</section>
 </main>
 
 <footer class="footer">
