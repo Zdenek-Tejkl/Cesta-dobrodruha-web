@@ -25,31 +25,117 @@
 
 <main class="apply">
   <div class="apply__inner">
+    <a href="index.html" class="apply__back">
+      <svg width="34" height="12" viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1.8" style="transform:scaleX(-1)" aria-hidden="true"><circle cx="5" cy="6" r="3.1"></circle><path d="M8.1 6 H29" stroke-linecap="round"></path><path d="M25.5 2.5 30.5 6 25.5 9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      Zpět na hlavní stránku
+    </a>
     <div class="final__card apply__card">
       <form id="lead-form" novalidate>
+        <p class="apply__note">Dotazník vyplní každý účastník zvlášť. Zálohu za všechny můžete poslat naráz.</p>
+
+        <span class="form-heading">Kontakt</span>
         <div class="field">
           <label for="lead-name">Jméno a příjmení</label>
           <input id="lead-name" name="name" type="text" autocomplete="name" class="input">
           <span class="form-error" id="err-name" role="alert"></span>
         </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="lead-vek">Věk</label>
+            <input id="lead-vek" name="vek" type="number" min="1" max="120" inputmode="numeric" class="input">
+            <span class="form-error" id="err-vek" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="lead-pocet">Rezervace pro</label>
+            <div class="field-inline">
+              <input id="lead-pocet" name="pocet" type="number" min="1" max="10" value="1" inputmode="numeric" class="input input--num">
+              <span class="field-inline__suffix">osob</span>
+            </div>
+            <span class="form-error" id="err-pocet" role="alert"></span>
+          </div>
+        </div>
         <div class="field">
-          <label for="lead-phone">Telefon</label>
+          <span class="field__label">Pohlaví</span>
+          <div class="choices">
+            <label><input type="radio" name="pohlavi" value="žena"> Žena</label>
+            <label><input type="radio" name="pohlavi" value="muž"> Muž</label>
+            <label><input type="radio" name="pohlavi" value="nechci uvádět"> Nechci uvádět</label>
+          </div>
+          <span class="form-error" id="err-pohlavi" role="alert"></span>
+        </div>
+        <div class="field">
+          <label for="lead-phone">Kontaktní telefon</label>
           <input id="lead-phone" name="phone" type="tel" autocomplete="tel" class="input">
           <span class="form-error" id="err-phone" role="alert"></span>
         </div>
         <div class="field">
-          <label for="lead-email">E-mail</label>
+          <label for="lead-email">Kontaktní e-mail</label>
           <input id="lead-email" name="email" type="email" autocomplete="email" class="input">
           <span class="form-error" id="err-email" role="alert"></span>
+        </div>
+
+        <span class="form-heading">Program</span>
+        <div class="field">
+          <span class="field__label">Chci se účastnit surfování</span>
+          <div class="choices">
+            <label><input type="radio" name="surf" value="ano"> Ano</label>
+            <label><input type="radio" name="surf" value="ne"> Ne</label>
+          </div>
+          <span class="form-error" id="err-surf" role="alert"></span>
+        </div>
+        <div class="field">
+          <span class="field__label">Do pouště chci vyrazit</span>
+          <div class="choices">
+            <label><input type="radio" name="poust" value="velbloud"> Na velbloudu</label>
+            <label><input type="radio" name="poust" value="čtyřkolka"> Na čtyřkolce</label>
+          </div>
+          <span class="form-error" id="err-poust" role="alert"></span>
+        </div>
+        <div class="field">
+          <span class="field__label">Hlavně se těším na <span class="field__optional">(vyberte cokoli)</span></span>
+          <div class="choices choices--wrap">
+            <label><input type="checkbox" name="tesim" value="markety a mediny"> Markety a mediny</label>
+            <label><input type="checkbox" name="tesim" value="hammam a lázně"> Hammam a lázně</label>
+            <label><input type="checkbox" name="tesim" value="moře a surf"> Moře a surf</label>
+            <label><input type="checkbox" name="tesim" value="trilobiti a sbírání fosilií"> Trilobiti a sbírání fosilií</label>
+            <label><input type="checkbox" name="tesim" value="poušť a pozorování hvězd"> Poušť a pozorování hvězd</label>
+          </div>
+          <input id="lead-tesim-jine" type="text" class="input input--sub" placeholder="Něco jiného? Napište sem.">
+        </div>
+        <div class="field">
+          <span class="field__label">Mluvím <span class="field__optional">(vyberte jazyky)</span></span>
+          <div class="choices choices--wrap">
+            <label><input type="checkbox" name="jazyk" value="česky" checked> Česky</label>
+            <label><input type="checkbox" name="jazyk" value="anglicky"> Anglicky</label>
+            <label><input type="checkbox" name="jazyk" value="francouzsky"> Francouzsky</label>
+            <label><input type="checkbox" name="jazyk" value="arabsky"> Arabsky</label>
+            <label><input type="checkbox" name="jazyk" value="španělsky"> Španělsky</label>
+          </div>
+          <input id="lead-jazyky-jine" type="text" class="input input--sub" placeholder="Jiné jazyky? Vypište sem.">
+        </div>
+
+        <span class="form-heading">O vás</span>
+        <div class="field">
+          <label for="lead-zdravi">Zdravotní potíže nebo omezení <span class="field__optional">(nepovinné)</span></label>
+          <textarea id="lead-zdravi" rows="2" class="input" placeholder="Cokoli, o čem bychom měli vědět: alergie, léky, omezení pohybu…"></textarea>
+        </div>
+        <div class="field">
+          <label for="lead-jidlo">Potravinová omezení <span class="field__optional">(nepovinné)</span></label>
+          <input id="lead-jidlo" type="text" class="input" placeholder="Vegetariánství, bezlepková dieta, alergie…">
+        </div>
+        <div class="field">
+          <label for="lead-obavy">Bojíte se něčeho? <span class="field__optional">(nepovinné)</span></label>
+          <input id="lead-obavy" type="text" class="input" placeholder="Napište to na rovinu, připravíme se na to.">
         </div>
         <div class="field">
           <label for="lead-note">Chcete se na něco zeptat? <span class="field__optional">(nepovinné)</span></label>
           <textarea id="lead-note" name="note" rows="2" class="input" placeholder="Napište cokoli, co vás o výpravě zajímá."></textarea>
         </div>
+
         <div class="field">
           <label class="field__consent">
             <input type="checkbox" id="lead-gdpr" name="gdpr">
-            <span>Souhlasím se zpracováním <a href="ochrana-osobnich-udaju.html">osobních údajů</a>.</span>
+            <span>Souhlasím se zpracováním <a href="ochrana-osobnich-udaju.html">osobních údajů</a>, včetně údajů o zdravotních a potravinových omezeních, která dobrovolně uvádím kvůli bezpečnému zajištění výpravy.</span>
           </label>
           <span class="form-error" id="err-gdpr" role="alert"></span>
         </div>
@@ -68,11 +154,13 @@
         <h3>Díky, dotazník je odeslaný.</h3>
         <p>Místo vám drží záloha. Pošlete ji převodem s vaším variabilním symbolem:</p>
         <div class="pay-box">
-          <span>ZÁLOHA: <strong id="pay-amount">25 000 KČ</strong></span>
-          <span>ÚČET: [DOPLNIT]</span>
+          <span>ZÁLOHA: <strong id="pay-amount">25 000 KČ</strong> / OSOBA</span>
+          <span id="pay-total" hidden></span>
+          <span>ÚČET: <strong id="pay-acc">[DOPLNIT]</strong></span>
           <span>VARIABILNÍ SYMBOL: <strong id="pay-vs"></strong></span>
         </div>
-        <p>Do 24 hodin se ozveme s potvrzením a smlouvou o zájezdu. Do 20. 9. zálohu vracíme celou, bez otázek. Máte-li dotaz, volejte +420 702 967 187.</p>
+        <div class="pay-qr" id="pay-qr" hidden><img id="pay-qr-img" alt="QR kód pro platbu zálohy"></div>
+        <p>Dotazník vyplní každý účastník zvlášť; zálohu za všechny můžete poslat naráz pod tímto variabilním symbolem. Do 24 hodin se ozveme s potvrzením a smlouvou o zájezdu. Do 20. 9. zálohu vracíme celou, bez otázek. Máte-li dotaz, volejte +420 702 967 187.</p>
       </div>
     </div>
   </div>
@@ -108,6 +196,7 @@
   </div>
 </footer>
 
+<script src="js/vendor/qrcode.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

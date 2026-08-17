@@ -566,10 +566,19 @@ textarea.input { resize: vertical; }
 .stop__img {
   grid-row: 1;
   width: 100%;
-  aspect-ratio: 3/2;
+  aspect-ratio: 4/3;
   object-fit: cover;
   border-radius: var(--cd-radius);
 }
+
+.stop__img--portrait {
+  aspect-ratio: 3/4;
+  max-width: 420px;
+  justify-self: center;
+}
+
+.stop--left .stop__img--portrait { justify-self: start; }
+.stop--right .stop__img--portrait { justify-self: end; }
 
 .stop--left .stop__body { grid-column: 1; text-align: right; }
 .stop--left .stop__img { grid-column: 3; }
@@ -1088,14 +1097,112 @@ textarea.input { resize: vertical; }
 /* samostatná stránka přihlášky: jen formulář uprostřed */
 .apply {
   background: var(--cd-uhel);
-  padding: calc(var(--nav-h) + clamp(32px, 6vw, 64px)) 24px clamp(64px, 9vw, 112px);
+  padding: calc(var(--nav-h) + clamp(28px, 5vw, 56px)) 24px clamp(64px, 9vw, 112px);
   min-height: 100vh;
   box-sizing: border-box;
 }
 
-.apply__card {
+.apply__inner {
   max-width: 560px;
   margin: 0 auto;
+}
+
+.apply__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--cd-pisek);
+  text-decoration: none;
+  font-family: var(--cd-font-display);
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.apply__back:hover { color: var(--cd-terakota); }
+
+.apply__card { width: 100%; }
+
+.apply__note {
+  margin: 0;
+  font-size: 15.5px;
+  font-style: italic;
+  color: rgba(34, 30, 26, 0.75);
+}
+
+.form-heading {
+  font-family: var(--cd-font-display);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cd-kamen);
+  margin-top: 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(110, 101, 92, 0.25);
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+
+.choices label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-family: var(--cd-font-text);
+  font-weight: 400;
+  font-size: 15.5px;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.choices input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--cd-terakota);
+  margin: 0;
+  flex: none;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input--num { width: 100px; }
+
+.field-inline__suffix {
+  font-family: var(--cd-font-text);
+  font-size: 16px;
+  color: var(--cd-kamen);
+}
+
+.input--sub { margin-top: 10px; }
+
+.pay-qr {
+  justify-self: center;
+  background: var(--cd-bila);
+  border: 1px solid rgba(110, 101, 92, 0.4);
+  border-radius: var(--cd-radius);
+  padding: 10px;
+  margin-top: 4px;
+}
+
+.pay-qr img {
+  display: block;
+  width: 176px;
+  height: 176px;
+  image-rendering: pixelated;
 }
 
 .final__badge {
@@ -1123,7 +1230,8 @@ textarea.input { resize: vertical; }
 
 .field { display: grid; gap: 6px; }
 
-.field label {
+.field label,
+.field .field__label {
   font-family: var(--cd-font-display);
   font-weight: 600;
   font-size: 13.5px;
@@ -1365,6 +1473,31 @@ textarea.input { resize: vertical; }
   color: var(--cd-terakota-tmava);
 }
 
+/* ---------- zpět nahoru ---------- */
+
+.to-top {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 70;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-content: center;
+  background: var(--cd-uhel);
+  color: var(--cd-pisek);
+  border: 1px solid rgba(110, 101, 92, 0.5);
+  border-radius: var(--cd-radius);
+  cursor: pointer;
+}
+
+.to-top:hover { background: var(--cd-terakota); color: var(--cd-bila); }
+.to-top[hidden] { display: none; }
+
+@media (max-width: 767px) {
+  .to-top { bottom: 78px; }
+}
+
 /* ---------- pohyb ---------- */
 
 .reveal {
@@ -1407,4 +1540,11 @@ textarea.input { resize: vertical; }
     transition: opacity 0.45s ease;
   }
   .hero__img { animation: none; }
+}
+
+.guide__img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: var(--cd-radius);
 }

@@ -6,6 +6,9 @@
   var SUPABASE_KEY = 'sb_publishable_l9O6G5ldcwcYixVOn1Xq9w_kJjdgCsg';
   var VYPRAVA_SLUG = 'maroko-2026';
   var VYPRAVA_ID = '79cca540-5dd4-4096-ad5a-c1c5b2290e07';
+  /* platební údaje: po doplnění IBAN se u přihlášky zobrazí i QR platba */
+  var PAY_IBAN = 'CZ2030300000003704398014';
+  var PAY_ACCOUNT_TEXT = '3704398014/3030';
 
   var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -66,10 +69,22 @@
     bar.hidden = !show;
   }
 
+  var toTop = document.getElementById('to-top');
+
+  function updateToTop() {
+    if (!toTop) return;
+    toTop.hidden = window.scrollY < 600;
+  }
+
+  if (toTop) toTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  });
+
   function onScroll() {
     updateNav();
     updateTrasa();
     updateBar();
+    updateToTop();
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -187,14 +202,47 @@
   var leadForm = document.getElementById('lead-form');
   var leadSent = document.getElementById('lead-sent');
 
-  function showLeadSent(vs, zalohaKc) {
+  function showLeadSent(vs, zalohaKc, pocet) {
     if (!leadForm || !leadSent) return;
+    pocet = pocet || 1;
     var vsEl = document.getElementById('pay-vs');
     var amountEl = document.getElementById('pay-amount');
+    var totalEl = document.getElementById('pay-total');
+    var accEl = document.getElementById('pay-acc');
     if (vsEl) vsEl.textContent = vs || 'SDĚLÍME TELEFONICKY';
     if (amountEl && zalohaKc) amountEl.textContent = zalohaKc.toLocaleString('cs-CZ') + ' KČ';
+    if (accEl) accEl.textContent = PAY_ACCOUNT_TEXT;
+    var total = (zalohaKc || 25000) * pocet;
+    if (totalEl && pocet > 1) {
+      totalEl.textContent = 'CELKEM ZA ' + pocet + ' ' + (pocet < 5 ? 'OSOBY' : 'OSOB') + ': ' + total.toLocaleString('cs-CZ') + ' KČ';
+      totalEl.hidden = false;
+    }
+    var qrBox = document.getElementById('pay-qr');
+    var qrImg = document.getElementById('pay-qr-img');
+    if (qrBox && qrImg && vs && PAY_IBAN && typeof qrcode !== 'undefined') {
+      try {
+        var spd = 'SPD*1.0*ACC:' + PAY_IBAN + '*RN:ZDENEK TEJKL*AM:' + total + '.00*CC:CZK*X-VS:' + vs + '*MSG:REZERVACE ZAJEZDU DOBRODRUHA MAROKO';
+        var qr = qrcode(0, 'M');
+        qr.addData(spd);
+        qr.make();
+        qrImg.src = qr.createDataURL(4, 0);
+        qrBox.hidden = false;
+      } catch (err) {}
+    }
     leadForm.hidden = true;
     leadSent.hidden = false;
+  }
+
+  function radioVal(name) {
+    var el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : null;
+  }
+
+  function checkedVals(name, jineId) {
+    var vals = Array.prototype.map.call(document.querySelectorAll('input[name="' + name + '"]:checked'), function (c) { return c.value; });
+    var jine = jineId ? document.getElementById(jineId) : null;
+    if (jine && jine.value.trim()) vals.push(jine.value.trim());
+    return vals.join(', ');
   }
 
   function setErr(id, msg) {
@@ -207,14 +255,29 @@
     var phone = document.getElementById('lead-phone').value;
     var email = document.getElementById('lead-email').value;
     var note = document.getElementById('lead-note').value;
+    var vek = parseInt(document.getElementById('lead-vek').value, 10);
+    var pocet = parseInt(document.getElementById('lead-pocet').value, 10);
+    var pohlavi = radioVal('pohlavi');
+    var surf = radioVal('surf');
+    var poust = radioVal('poust');
+    var tesim = checkedVals('tesim', 'lead-tesim-jine');
+    var jazyky = checkedVals('jazyk', 'lead-jazyky-jine');
+    var zdravi = document.getElementById('lead-zdravi').value;
+    var jidlo = document.getElementById('lead-jidlo').value;
+    var obavy = document.getElementById('lead-obavy').value;
     var gdpr = document.getElementById('lead-gdpr').checked;
     var podminky = document.getElementById('lead-podminky').checked;
     var submitBtn = document.getElementById('lead-submit');
 
     var ok = true;
     if (!name.trim()) { setErr('err-name', 'Doplňte jméno.'); ok = false; } else setErr('err-name');
+    if (!vek || vek < 1 || vek > 120) { setErr('err-vek', 'Doplňte věk.'); ok = false; } else setErr('err-vek');
+    if (!pocet || pocet < 1 || pocet > 10) { setErr('err-pocet', 'Doplňte počet osob, 1 až 10.'); ok = false; } else setErr('err-pocet');
+    if (!pohlavi) { setErr('err-pohlavi', 'Vyberte jednu z možností.'); ok = false; } else setErr('err-pohlavi');
     if (!phone.trim()) { setErr('err-phone', 'Doplňte telefon, bez něj se vám nedovoláme.'); ok = false; } else setErr('err-phone');
     if (!EMAIL_RE.test(email)) { setErr('err-email', 'Doplňte e-mail, pošleme na něj smlouvu a podklady.'); ok = false; } else setErr('err-email');
+    if (!surf) { setErr('err-surf', 'Vyberte ano, nebo ne.'); ok = false; } else setErr('err-surf');
+    if (!poust) { setErr('err-poust', 'Vyberte velblouda, nebo čtyřkolku.'); ok = false; } else setErr('err-poust');
     if (!gdpr) { setErr('err-gdpr', 'Potvrďte prosím souhlas se zpracováním údajů.'); ok = false; } else setErr('err-gdpr');
     if (!podminky) { setErr('err-podminky', 'Potvrďte prosím souhlas s obchodními podmínkami.'); ok = false; } else setErr('err-podminky');
     if (!ok) return;
@@ -242,7 +305,17 @@
         p_telefon: phone.trim(),
         p_zprava: note.trim() || null,
         p_souhlas_gdpr: gdpr,
-        p_souhlas_podminky: podminky
+        p_souhlas_podminky: podminky,
+        p_vek: vek,
+        p_pohlavi: pohlavi,
+        p_zdravotni: zdravi.trim() || null,
+        p_potraviny: jidlo.trim() || null,
+        p_surf: surf === 'ano',
+        p_poust: poust,
+        p_obavy: obavy.trim() || null,
+        p_tesim: tesim || null,
+        p_jazyky: jazyky || null,
+        p_pocet_osob: pocet
       })
     }).then(function (res) {
       if (!res.ok) throw new Error('http ' + res.status);
@@ -250,10 +323,10 @@
     }).then(function (data) {
       try {
         localStorage.setItem('cd-maroko-lead', JSON.stringify({
-          ts: Date.now(), vs: data.vs, zaloha_kc: data.zaloha_kc
+          ts: Date.now(), vs: data.vs, zaloha_kc: data.zaloha_kc, pocet: pocet
         }));
       } catch (err) {}
-      showLeadSent(data.vs, data.zaloha_kc);
+      showLeadSent(data.vs, data.zaloha_kc, pocet);
     }).catch(function () {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Chci jet';
@@ -367,7 +440,7 @@
     if (savedLead) {
       var lead = {};
       try { lead = JSON.parse(savedLead) || {}; } catch (err) {}
-      showLeadSent(lead.vs, lead.zaloha_kc);
+      showLeadSent(lead.vs, lead.zaloha_kc, lead.pocet);
     }
     if (localStorage.getItem('cd-maroko-dotaz')) showDotazSent();
     if (localStorage.getItem('cd-maroko-pdf')) showPdfSent();
