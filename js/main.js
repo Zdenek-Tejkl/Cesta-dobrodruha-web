@@ -81,43 +81,75 @@
   /* ---------- odhalování při scrollu ---------- */
 
   (function initReveals() {
-    if (reduced || !('IntersectionObserver' in window)) return;
+    if (!('IntersectionObserver' in window)) return;
 
     var toReveal = [];
 
-    function add(el, delay) {
+    function add(el, delay, variant) {
       el.classList.add('reveal');
+      if (variant) el.classList.add(variant);
       if (delay) el.style.setProperty('--reveal-delay', delay + 'ms');
       toReveal.push(el);
     }
 
-    // hero: postupný nástup po načtení
+    // hero: výrazný postupný nástup textů po načtení
     ['.hero__brand', '.hero__badge', '.hero__title', '.hero__sub', '.hero__cta', '.hero__micro'].forEach(function (sel, i) {
       var el = document.querySelector(sel);
-      if (el) add(el, i * 110);
+      if (el) add(el, 100 + i * 130, 'reveal--hero');
     });
 
     // samostatné bloky
-    ['.eyebrow', '.h2', '.contrast__intro', '.program__intro', '.program__map', '.program__outro', '.program__cta',
-     '.pdf__card', '.stay__text', '.guides__story', '.price__head', '.price__principle', '.price__cta',
-     '.deposit__intro', '.deposit__note', '.fit__outro', '.final__card', '.apply__card', '.final__badge', '.final__text'
+    ['.eyebrow', '.h2', '.contrast__intro', '.program__intro', '.program__outro', '.program__cta',
+     '.stay__text', '.guides__story', '.price__principle', '.price__cta',
+     '.deposit__intro', '.deposit__note', '.fit__outro', '.final__badge', '.final__text'
     ].forEach(function (sel) {
       Array.prototype.forEach.call(document.querySelectorAll(sel), function (el) {
         if (!el.classList.contains('reveal')) add(el, 0);
       });
     });
 
-    // skupiny s odstupňovaným nástupem
-    ['.trust__item', '.contrast__row', '.stay__photos figure', '.guide', '.deposit__step',
-     '.fit__card', '.price__cols > div', '.faq__item'
-    ].forEach(function (sel) {
-      Array.prototype.forEach.call(document.querySelectorAll(sel), function (el, i) {
-        add(el, (i % 5) * 90);
+    // bloky s jemným zoomem
+    ['.program__map', '.pdf__card', '.final__card', '.apply__card'].forEach(function (sel) {
+      Array.prototype.forEach.call(document.querySelectorAll(sel), function (el) {
+        if (!el.classList.contains('reveal')) add(el, 0, 'reveal--zoom');
       });
     });
 
-    // zastávky programu bez zpoždění (jsou pod sebou)
-    Array.prototype.forEach.call(document.querySelectorAll('.stop'), function (el) { add(el, 0); });
+    // cena: přeškrtnutá stará, nová naskočí
+    var priceOld = document.querySelector('.price__old');
+    var priceNew = document.querySelector('.price__new');
+    var priceTerms = document.querySelector('.price__terms');
+    if (priceOld) add(priceOld, 0);
+    if (priceNew) add(priceNew, 140, 'reveal--pop');
+    if (priceTerms) add(priceTerms, 280);
+
+    // tabulka turista vs. dobrodruzi: zleva, šipka, zprava
+    Array.prototype.forEach.call(document.querySelectorAll('.contrast__row'), function (row) {
+      var tourist = row.querySelector('.contrast__cell--tourist');
+      var arrow = row.querySelector('.contrast__arrow');
+      var us = row.querySelector('.contrast__cell--us');
+      if (tourist) add(tourist, 0, 'reveal--left');
+      if (arrow) add(arrow, 140, 'reveal--zoom');
+      if (us) add(us, 240, 'reveal--right');
+    });
+
+    // zastávky programu: text a fotka se sjíždějí z obou stran k lince
+    Array.prototype.forEach.call(document.querySelectorAll('.stop'), function (stop) {
+      var body = stop.querySelector('.stop__body');
+      var img = stop.querySelector('.stop__img');
+      var fromLeft = stop.classList.contains('stop--left');
+      if (body) add(body, 0, fromLeft ? 'reveal--left' : 'reveal--right');
+      if (img) add(img, 120, fromLeft ? 'reveal--right' : 'reveal--left');
+    });
+
+    // skupiny s odstupňovaným nástupem
+    [['.trust__item', null], ['.stay__photos figure', 'reveal--zoom'], ['.guide', null],
+     ['.deposit__step', null], ['.fit__card', null], ['.price__cols > div', null], ['.faq__item', null]
+    ].forEach(function (pair) {
+      Array.prototype.forEach.call(document.querySelectorAll(pair[0]), function (el, i) {
+        add(el, (i % 5) * 100, pair[1]);
+      });
+    });
 
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {

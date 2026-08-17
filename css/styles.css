@@ -1370,17 +1370,40 @@ textarea.input { resize: vertical; }
 .reveal {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.7s ease, transform 0.7s ease;
   transition-delay: var(--reveal-delay, 0ms);
 }
+
+.reveal--hero { transform: translateY(32px); }
+.reveal--left { transform: translateX(-32px); }
+.reveal--right { transform: translateX(32px); }
+.reveal--zoom { transform: scale(0.94); }
+.reveal--pop { transform: scale(0.82); }
 
 .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
 
+/* pomalé dozoomování hero fotky po načtení */
+.hero { overflow: hidden; }
+
+.hero__img {
+  animation: hero-zoom 9s ease-out forwards;
+}
+
+@keyframes hero-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .nav { transition: none; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  /* při omezení animací jen jemné prolnutí bez posunu */
+  .reveal, .reveal--hero, .reveal--left, .reveal--right, .reveal--zoom, .reveal--pop {
+    transform: none;
+    transition: opacity 0.45s ease;
+  }
+  .hero__img { animation: none; }
 }
