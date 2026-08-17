@@ -213,9 +213,13 @@
     if (amountEl && zalohaKc) amountEl.textContent = zalohaKc.toLocaleString('cs-CZ') + ' KČ';
     if (accEl) accEl.textContent = PAY_ACCOUNT_TEXT;
     var total = (zalohaKc || 25000) * pocet;
-    if (totalEl && pocet > 1) {
-      totalEl.textContent = 'CELKEM ZA ' + pocet + ' ' + (pocet < 5 ? 'OSOBY' : 'OSOB') + ': ' + total.toLocaleString('cs-CZ') + ' KČ';
-      totalEl.hidden = false;
+    if (totalEl) {
+      if (pocet > 1) {
+        totalEl.textContent = 'CELKEM ZA ' + pocet + ' ' + (pocet < 5 ? 'OSOBY' : 'OSOB') + ': ' + total.toLocaleString('cs-CZ') + ' KČ';
+        totalEl.hidden = false;
+      } else {
+        totalEl.hidden = true;
+      }
     }
     var qrBox = document.getElementById('pay-qr');
     var qrImg = document.getElementById('pay-qr-img');
@@ -332,6 +336,19 @@
       submitBtn.textContent = 'Chci jet';
       setErr('err-submit', 'Odeslání se nepovedlo. Zkuste to prosím znovu, nebo volejte +420 702 967 187.');
     });
+  });
+
+  /* dotazník pro dalšího cestujícího: vrátí prázdný formulář, platební údaje se zobrazí znovu po odeslání */
+  var leadAnother = document.getElementById('lead-another');
+  if (leadAnother) leadAnother.addEventListener('click', function () {
+    if (!leadForm || !leadSent) return;
+    leadForm.reset();
+    var submitBtn = document.getElementById('lead-submit');
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Chci jet'; }
+    setErr('err-submit');
+    leadSent.hidden = true;
+    leadForm.hidden = false;
+    window.scrollTo({ top: 0, behavior: 'auto' });
   });
 
   /* ---------- dotaz (zavolejte mi) ---------- */
