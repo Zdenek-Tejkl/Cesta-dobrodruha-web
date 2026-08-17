@@ -153,10 +153,7 @@
 
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          en.target.classList.add('is-visible');
-          io.unobserve(en.target);
-        }
+        en.target.classList.toggle('is-visible', en.isIntersecting);
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
