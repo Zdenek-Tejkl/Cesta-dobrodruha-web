@@ -10,6 +10,96 @@
   var PAY_IBAN = 'CZ2030300000003704398014';
   var PAY_ACCOUNT_TEXT = '3704398014/3030';
 
+  /* texty závislé na jazyku stránky (podle atributu lang na <html>) */
+  var LANG = (document.documentElement.lang || 'cs').slice(0, 2);
+  var STR = {
+    cs: {
+      locale: 'cs-CZ', cur: ' KČ',
+      vsFallback: 'SDĚLÍME TELEFONICKY',
+      totalFor: function (n, castka) { return 'CELKEM ZA ' + n + ' ' + (n < 5 ? 'OSOBY' : 'OSOB') + ': ' + castka; },
+      sending: 'Odesílám…',
+      errName: 'Doplňte jméno.',
+      errVek: 'Doplňte věk.',
+      errPocet: 'Doplňte počet osob, 1 až 10.',
+      errPohlavi: 'Vyberte jednu z možností.',
+      errPhone: 'Doplňte telefon, bez něj se vám nedovoláme.',
+      errEmail: 'Doplňte e-mail, pošleme na něj smlouvu a podklady.',
+      errSurf: 'Vyberte ano, nebo ne.',
+      errPoust: 'Vyberte velblouda, nebo čtyřkolku.',
+      errGdpr: 'Potvrďte prosím souhlas se zpracováním údajů.',
+      errPodminky: 'Potvrďte prosím souhlas s obchodními podmínkami.',
+      errSubmit: 'Odeslání se nepovedlo. Zkuste to prosím znovu, nebo volejte +420 702 967 187.',
+      errDText: 'Napište nám dotaz, ať se na telefonát připravíme.',
+      errDEmail: 'Zkontrolujte e-mail, má být ve tvaru jmeno@domena.cz.',
+      errPdfEmail: 'Doplňte e-mail ve tvaru jmeno@domena.cz.',
+      errPdfSubmit: 'Odeslání se nepovedlo. Zkuste to prosím znovu.'
+    },
+    en: {
+      locale: 'en-GB', cur: ' CZK',
+      vsFallback: 'WE WILL CONFIRM IT BY PHONE',
+      totalFor: function (n, castka) { return 'TOTAL FOR ' + n + ' PEOPLE: ' + castka; },
+      sending: 'Sending…',
+      errName: 'Please fill in your name.',
+      errVek: 'Please fill in your age.',
+      errPocet: 'Please enter the number of people, 1 to 10.',
+      errPohlavi: 'Please choose one of the options.',
+      errPhone: 'Please fill in your phone number so we can reach you.',
+      errEmail: 'Please fill in your e-mail; we will send the contract and documents there.',
+      errSurf: 'Please choose yes or no.',
+      errPoust: 'Please choose the camel or the quad bike.',
+      errGdpr: 'Please confirm your consent to the processing of personal data.',
+      errPodminky: 'Please confirm your agreement with the terms and conditions.',
+      errSubmit: 'Sending failed. Please try again or call +420 702 967 187.',
+      errDText: 'Please write your question so we can prepare for the call.',
+      errDEmail: 'Please check the e-mail address; it should look like name@domain.com.',
+      errPdfEmail: 'Please enter an e-mail address like name@domain.com.',
+      errPdfSubmit: 'Sending failed. Please try again.'
+    },
+    uk: {
+      locale: 'uk-UA', cur: ' CZK',
+      vsFallback: 'ПОВІДОМИМО ТЕЛЕФОНОМ',
+      totalFor: function (n, castka) { return 'РАЗОМ ЗА ' + n + ' ' + (n < 5 ? 'ОСОБИ' : 'ОСІБ') + ': ' + castka; },
+      sending: 'Надсилаємо…',
+      errName: 'Вкажіть, будь ласка, імʼя та прізвище.',
+      errVek: 'Вкажіть, будь ласка, вік.',
+      errPocet: 'Вкажіть кількість осіб, від 1 до 10.',
+      errPohlavi: 'Оберіть один із варіантів.',
+      errPhone: 'Вкажіть телефон, інакше ми не зможемо вам зателефонувати.',
+      errEmail: 'Вкажіть e-mail; на нього надішлемо договір і документи.',
+      errSurf: 'Оберіть так або ні.',
+      errPoust: 'Оберіть верблюда або квадроцикл.',
+      errGdpr: 'Підтвердьте, будь ласка, згоду на обробку персональних даних.',
+      errPodminky: 'Підтвердьте, будь ласка, згоду з умовами.',
+      errSubmit: 'Не вдалося надіслати. Спробуйте ще раз або зателефонуйте +420 702 967 187.',
+      errDText: 'Напишіть ваше запитання, щоб ми підготувалися до розмови.',
+      errDEmail: 'Перевірте e-mail, він має виглядати як name@domain.com.',
+      errPdfEmail: 'Вкажіть e-mail у форматі name@domain.com.',
+      errPdfSubmit: 'Не вдалося надіслати. Спробуйте ще раз.'
+    },
+    sk: {
+      locale: 'sk-SK', cur: ' KČ',
+      vsFallback: 'OZNÁMIME TELEFONICKY',
+      totalFor: function (n, castka) { return 'SPOLU ZA ' + n + ' ' + (n < 5 ? 'OSOBY' : 'OSÔB') + ': ' + castka; },
+      sending: 'Odosielam…',
+      errName: 'Doplňte meno.',
+      errVek: 'Doplňte vek.',
+      errPocet: 'Doplňte počet osôb, 1 až 10.',
+      errPohlavi: 'Vyberte jednu z možností.',
+      errPhone: 'Doplňte telefón, bez neho sa vám nedovoláme.',
+      errEmail: 'Doplňte e-mail, pošleme naň zmluvu a podklady.',
+      errSurf: 'Vyberte áno, alebo nie.',
+      errPoust: 'Vyberte ťavu, alebo štvorkolku.',
+      errGdpr: 'Potvrďte, prosím, súhlas so spracovaním údajov.',
+      errPodminky: 'Potvrďte, prosím, súhlas s obchodnými podmienkami.',
+      errSubmit: 'Odoslanie sa nepodarilo. Skúste to, prosím, znova, alebo volajte +420 702 967 187.',
+      errDText: 'Napíšte nám otázku, nech sa na telefonát pripravíme.',
+      errDEmail: 'Skontrolujte e-mail, má byť v tvare meno@domena.sk.',
+      errPdfEmail: 'Doplňte e-mail v tvare meno@domena.sk.',
+      errPdfSubmit: 'Odoslanie sa nepodarilo. Skúste to, prosím, znova.'
+    }
+  };
+  var T = STR[LANG] || STR.cs;
+
   var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -209,13 +299,13 @@
     var amountEl = document.getElementById('pay-amount');
     var totalEl = document.getElementById('pay-total');
     var accEl = document.getElementById('pay-acc');
-    if (vsEl) vsEl.textContent = vs || 'SDĚLÍME TELEFONICKY';
-    if (amountEl && zalohaKc) amountEl.textContent = zalohaKc.toLocaleString('cs-CZ') + ' KČ';
+    if (vsEl) vsEl.textContent = vs || T.vsFallback;
+    if (amountEl && zalohaKc) amountEl.textContent = zalohaKc.toLocaleString(T.locale) + T.cur;
     if (accEl) accEl.textContent = PAY_ACCOUNT_TEXT;
     var total = (zalohaKc || 25000) * pocet;
     if (totalEl) {
       if (pocet > 1) {
-        totalEl.textContent = 'CELKEM ZA ' + pocet + ' ' + (pocet < 5 ? 'OSOBY' : 'OSOB') + ': ' + total.toLocaleString('cs-CZ') + ' KČ';
+        totalEl.textContent = T.totalFor(pocet, total.toLocaleString(T.locale) + T.cur);
         totalEl.hidden = false;
       } else {
         totalEl.hidden = true;
@@ -274,24 +364,25 @@
     var submitBtn = document.getElementById('lead-submit');
 
     var ok = true;
-    if (!name.trim()) { setErr('err-name', 'Doplňte jméno.'); ok = false; } else setErr('err-name');
-    if (!vek || vek < 1 || vek > 120) { setErr('err-vek', 'Doplňte věk.'); ok = false; } else setErr('err-vek');
-    if (!pocet || pocet < 1 || pocet > 10) { setErr('err-pocet', 'Doplňte počet osob, 1 až 10.'); ok = false; } else setErr('err-pocet');
-    if (!pohlavi) { setErr('err-pohlavi', 'Vyberte jednu z možností.'); ok = false; } else setErr('err-pohlavi');
-    if (!phone.trim()) { setErr('err-phone', 'Doplňte telefon, bez něj se vám nedovoláme.'); ok = false; } else setErr('err-phone');
-    if (!EMAIL_RE.test(email)) { setErr('err-email', 'Doplňte e-mail, pošleme na něj smlouvu a podklady.'); ok = false; } else setErr('err-email');
-    if (!surf) { setErr('err-surf', 'Vyberte ano, nebo ne.'); ok = false; } else setErr('err-surf');
-    if (!poust) { setErr('err-poust', 'Vyberte velblouda, nebo čtyřkolku.'); ok = false; } else setErr('err-poust');
-    if (!gdpr) { setErr('err-gdpr', 'Potvrďte prosím souhlas se zpracováním údajů.'); ok = false; } else setErr('err-gdpr');
-    if (!podminky) { setErr('err-podminky', 'Potvrďte prosím souhlas s obchodními podmínkami.'); ok = false; } else setErr('err-podminky');
+    if (!name.trim()) { setErr('err-name', T.errName); ok = false; } else setErr('err-name');
+    if (!vek || vek < 1 || vek > 120) { setErr('err-vek', T.errVek); ok = false; } else setErr('err-vek');
+    if (!pocet || pocet < 1 || pocet > 10) { setErr('err-pocet', T.errPocet); ok = false; } else setErr('err-pocet');
+    if (!pohlavi) { setErr('err-pohlavi', T.errPohlavi); ok = false; } else setErr('err-pohlavi');
+    if (!phone.trim()) { setErr('err-phone', T.errPhone); ok = false; } else setErr('err-phone');
+    if (!EMAIL_RE.test(email)) { setErr('err-email', T.errEmail); ok = false; } else setErr('err-email');
+    if (!surf) { setErr('err-surf', T.errSurf); ok = false; } else setErr('err-surf');
+    if (!poust) { setErr('err-poust', T.errPoust); ok = false; } else setErr('err-poust');
+    if (!gdpr) { setErr('err-gdpr', T.errGdpr); ok = false; } else setErr('err-gdpr');
+    if (!podminky) { setErr('err-podminky', T.errPodminky); ok = false; } else setErr('err-podminky');
     if (!ok) return;
 
     var parts = name.trim().split(/\s+/);
     var prijmeni = parts.length > 1 ? parts.pop() : null;
     var jmeno = parts.join(' ');
 
+    var leadBtnText = submitBtn.textContent;
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Odesílám…';
+    submitBtn.textContent = T.sending;
     setErr('err-submit');
 
     fetch(SUPABASE_URL + '/rest/v1/rpc/podat_prihlasku', {
@@ -333,8 +424,8 @@
       showLeadSent(data.vs, data.zaloha_kc, pocet);
     }).catch(function () {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Chci jet';
-      setErr('err-submit', 'Odeslání se nepovedlo. Zkuste to prosím znovu, nebo volejte +420 702 967 187.');
+      submitBtn.textContent = leadBtnText;
+      setErr('err-submit', T.errSubmit);
     });
   });
 
@@ -372,15 +463,16 @@
     var submitBtn = document.getElementById('dotaz-submit');
 
     var ok = true;
-    if (!dotaz.trim()) { setErr('err-d-text', 'Napište nám dotaz, ať se na telefonát připravíme.'); ok = false; } else setErr('err-d-text');
-    if (!name.trim()) { setErr('err-d-name', 'Doplňte jméno.'); ok = false; } else setErr('err-d-name');
-    if (!phone.trim()) { setErr('err-d-phone', 'Doplňte telefon, bez něj se vám nedovoláme.'); ok = false; } else setErr('err-d-phone');
-    if (email.trim() && !EMAIL_RE.test(email)) { setErr('err-d-email', 'Zkontrolujte e-mail, má být ve tvaru jmeno@domena.cz.'); ok = false; } else setErr('err-d-email');
-    if (!gdpr) { setErr('err-d-gdpr', 'Potvrďte prosím souhlas se zpracováním údajů.'); ok = false; } else setErr('err-d-gdpr');
+    if (!dotaz.trim()) { setErr('err-d-text', T.errDText); ok = false; } else setErr('err-d-text');
+    if (!name.trim()) { setErr('err-d-name', T.errName); ok = false; } else setErr('err-d-name');
+    if (!phone.trim()) { setErr('err-d-phone', T.errPhone); ok = false; } else setErr('err-d-phone');
+    if (email.trim() && !EMAIL_RE.test(email)) { setErr('err-d-email', T.errDEmail); ok = false; } else setErr('err-d-email');
+    if (!gdpr) { setErr('err-d-gdpr', T.errGdpr); ok = false; } else setErr('err-d-gdpr');
     if (!ok) return;
 
+    var dotazBtnText = submitBtn.textContent;
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Odesílám…';
+    submitBtn.textContent = T.sending;
     setErr('err-d-submit');
 
     fetch(SUPABASE_URL + '/rest/v1/dotazy', {
@@ -405,8 +497,8 @@
       showDotazSent();
     }).catch(function () {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Zavolejte mi';
-      setErr('err-d-submit', 'Odeslání se nepovedlo. Zkuste to prosím znovu, nebo volejte +420 702 967 187.');
+      submitBtn.textContent = dotazBtnText;
+      setErr('err-d-submit', T.errSubmit);
     });
   });
 
@@ -427,7 +519,7 @@
     e.preventDefault();
     var email = document.getElementById('pdf-email').value;
     if (!EMAIL_RE.test(email)) {
-      pdfErr.textContent = 'Doplňte e-mail ve tvaru jmeno@domena.cz.';
+      pdfErr.textContent = T.errPdfEmail;
       return;
     }
     pdfErr.textContent = '';
@@ -446,7 +538,7 @@
       try { localStorage.setItem('cd-maroko-pdf', email); } catch (err) {}
       showPdfSent();
     }).catch(function () {
-      pdfErr.textContent = 'Odeslání se nepovedlo. Zkuste to prosím znovu.';
+      pdfErr.textContent = T.errPdfSubmit;
     });
   });
 

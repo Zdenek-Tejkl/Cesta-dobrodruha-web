@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Count me in | Morocco 2026 | Cesta dobrodruha</title>
+  <meta name="description" content="Application for the Morocco 2026 expedition. Fill in the questionnaire and hold your place with a deposit; fully refundable until 20 September.">
+  <meta name="theme-color" content="#221E1A">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 12'%3E%3Cg fill='none' stroke='%23B4501E' stroke-width='2.4'%3E%3Ccircle cx='5' cy='6' r='3.1'/%3E%3Cpath d='M8.1 6 H29' stroke-linecap='round'/%3E%3Cpath d='M25.5 2.5 30.5 6 25.5 9.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="alternate" hreflang="cs" href="https://www.cestadobrodruha.cz/chci-jet.html">
+  <link rel="alternate" hreflang="en" href="https://www.cestadobrodruha.cz/en/chci-jet.html">
+  <link rel="alternate" hreflang="uk" href="https://www.cestadobrodruha.cz/uk/chci-jet.html">
+  <link rel="alternate" hreflang="sk" href="https://www.cestadobrodruha.cz/sk/chci-jet.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.cestadobrodruha.cz/chci-jet.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<header class="nav nav--page">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="Cesta dobrodruha, back to the home page">
+      <svg width="34" height="12" viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="5" cy="6" r="3.1"></circle><path d="M8.1 6 H29" stroke-linecap="round"></path><path d="M25.5 2.5 30.5 6 25.5 9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span>CESTA DOBRODRUHA</span>
+    </a>
+    <span class="nav__langs nav__langs--solo" aria-label="Site language">
+      <a href="../chci-jet.html" hreflang="cs">CZ</a>
+      <span class="is-active">EN</span>
+      <a href="../uk/chci-jet.html" hreflang="uk">UA</a>
+      <a href="../sk/chci-jet.html" hreflang="sk">SK</a>
+    </span>
+  </div>
+</header>
+
+<main class="apply">
+  <div class="apply__inner">
+    <a href="index.html" class="apply__back">
+      <svg width="34" height="12" viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1.8" style="transform:scaleX(-1)" aria-hidden="true"><circle cx="5" cy="6" r="3.1"></circle><path d="M8.1 6 H29" stroke-linecap="round"></path><path d="M25.5 2.5 30.5 6 25.5 9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      Back to the home page
+    </a>
+    <div class="final__card apply__card">
+      <form id="lead-form" novalidate>
+        <p class="apply__note">Each traveller fills in their own questionnaire. The deposit for everyone can be sent in one payment.</p>
+
+        <span class="form-heading">Contact</span>
+        <div class="field">
+          <label for="lead-name">Full name</label>
+          <input id="lead-name" name="name" type="text" autocomplete="name" class="input">
+          <span class="form-error" id="err-name" role="alert"></span>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="lead-vek">Age</label>
+            <input id="lead-vek" name="vek" type="number" min="1" max="120" inputmode="numeric" class="input">
+            <span class="form-error" id="err-vek" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="lead-pocet">Booking for</label>
+            <div class="field-inline">
+              <input id="lead-pocet" name="pocet" type="number" min="1" max="10" value="1" inputmode="numeric" class="input input--num">
+              <span class="field-inline__suffix">people</span>
+            </div>
+            <span class="form-error" id="err-pocet" role="alert"></span>
+          </div>
+        </div>
+        <div class="field">
+          <span class="field__label">Sex</span>
+          <div class="choices">
+            <label><input type="radio" name="pohlavi" value="žena"> Female</label>
+            <label><input type="radio" name="pohlavi" value="muž"> Male</label>
+            <label><input type="radio" name="pohlavi" value="nechci uvádět"> Prefer not to say</label>
+          </div>
+          <span class="form-error" id="err-pohlavi" role="alert"></span>
+        </div>
+        <div class="field">
+          <label for="lead-phone">Contact phone</label>
+          <input id="lead-phone" name="phone" type="tel" autocomplete="tel" class="input">
+          <span class="form-error" id="err-phone" role="alert"></span>
+        </div>
+        <div class="field">
+          <label for="lead-email">Contact e-mail</label>
+          <input id="lead-email" name="email" type="email" autocomplete="email" class="input">
+          <span class="form-error" id="err-email" role="alert"></span>
+        </div>
+
+        <span class="form-heading">Programme</span>
+        <div class="field">
+          <span class="field__label">I want to join the surfing</span>
+          <div class="choices">
+            <label><input type="radio" name="surf" value="ano"> Yes</label>
+            <label><input type="radio" name="surf" value="ne"> No</label>
+          </div>
+          <span class="form-error" id="err-surf" role="alert"></span>
+        </div>
+        <div class="field">
+          <span class="field__label">Into the desert I want to go</span>
+          <div class="choices">
+            <label><input type="radio" name="poust" value="velbloud"> By camel</label>
+            <label><input type="radio" name="poust" value="čtyřkolka"> By quad bike</label>
+          </div>
+          <span class="form-error" id="err-poust" role="alert"></span>
+        </div>
+        <div class="field">
+          <span class="field__label">I am most looking forward to <span class="field__optional">(pick any)</span></span>
+          <div class="choices choices--wrap">
+            <label><input type="checkbox" name="tesim" value="markety a mediny"> Markets and medinas</label>
+            <label><input type="checkbox" name="tesim" value="hammam a lázně"> Hammam and baths</label>
+            <label><input type="checkbox" name="tesim" value="moře a surf"> Sea and surf</label>
+            <label><input type="checkbox" name="tesim" value="trilobiti a sbírání fosilií"> Trilobites and fossil hunting</label>
+            <label><input type="checkbox" name="tesim" value="poušť a pozorování hvězd"> Desert and stargazing</label>
+          </div>
+          <input id="lead-tesim-jine" type="text" class="input input--sub" placeholder="Something else? Write it here.">
+        </div>
+        <div class="field">
+          <span class="field__label">I speak <span class="field__optional">(pick your languages)</span></span>
+          <div class="choices choices--wrap">
+            <label><input type="checkbox" name="jazyk" value="česky" checked> Czech</label>
+            <label><input type="checkbox" name="jazyk" value="anglicky"> English</label>
+            <label><input type="checkbox" name="jazyk" value="francouzsky"> French</label>
+            <label><input type="checkbox" name="jazyk" value="arabsky"> Arabic</label>
+            <label><input type="checkbox" name="jazyk" value="španělsky"> Spanish</label>
+          </div>
+          <input id="lead-jazyky-jine" type="text" class="input input--sub" placeholder="Other languages? List them here.">
+        </div>
+
+        <span class="form-heading">About you</span>
+        <div class="field">
+          <label for="lead-zdravi">Health issues or limitations <span class="field__optional">(optional)</span></label>
+          <textarea id="lead-zdravi" rows="2" class="input" placeholder="Anything we should know about: allergies, medication, mobility limits…"></textarea>
+        </div>
+        <div class="field">
+          <label for="lead-jidlo">Dietary restrictions <span class="field__optional">(optional)</span></label>
+          <input id="lead-jidlo" type="text" class="input" placeholder="Vegetarian, gluten-free, allergies…">
+        </div>
+        <div class="field">
+          <label for="lead-obavy">Is there anything you are worried about? <span class="field__optional">(optional)</span></label>
+          <input id="lead-obavy" type="text" class="input" placeholder="Say it straight and we will prepare for it.">
+        </div>
+        <div class="field">
+          <label for="lead-note">Anything you want to ask? <span class="field__optional">(optional)</span></label>
+          <textarea id="lead-note" name="note" rows="2" class="input" placeholder="Ask anything you want to know about the trip."></textarea>
+        </div>
+
+        <div class="field">
+          <label class="field__consent">
+            <input type="checkbox" id="lead-gdpr" name="gdpr">
+            <span>I consent to the processing of my <a href="../ochrana-osobnich-udaju.html">personal data</a> (policy in Czech), including the health and dietary details I volunteer so the expedition can be run safely.</span>
+          </label>
+          <span class="form-error" id="err-gdpr" role="alert"></span>
+        </div>
+        <div class="field">
+          <label class="field__consent">
+            <input type="checkbox" id="lead-podminky" name="podminky">
+            <span>I agree to the <a href="../vop.html">Terms and Conditions</a> (in Czech).</span>
+          </label>
+          <span class="form-error" id="err-podminky" role="alert"></span>
+        </div>
+        <button type="submit" id="lead-submit" class="btn btn--primary btn--block">Count me in</button>
+        <span class="form-error" id="err-submit" role="alert"></span>
+      </form>
+      <div id="lead-sent" class="final__sent" hidden>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1E4E5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+        <h3>Thank you, your questionnaire has been sent.</h3>
+        <p>Your place is held by the deposit. Send it by bank transfer with your payment reference:</p>
+        <div class="pay-box">
+          <span>DEPOSIT: <strong id="pay-amount">25,000 CZK</strong> / PERSON</span>
+          <span id="pay-total" hidden></span>
+          <span>ACCOUNT: <strong id="pay-acc">3704398014/3030</strong></span>
+          <span>PAYMENT REFERENCE (VS): <strong id="pay-vs"></strong></span>
+        </div>
+        <div class="pay-qr" id="pay-qr" hidden><img id="pay-qr-img" alt="QR code for the deposit payment"></div>
+        <p>Each traveller fills in their own questionnaire; the deposit for the whole group can be sent in one payment under this reference. If the person who made the booking has already paid for your group, do not send it again. We will get back to you within 24 hours with a confirmation and the tour contract. Until 20 September the deposit is fully refundable. Any questions, call +420 702 967 187.</p>
+        <button type="button" id="lead-another" class="btn btn--secondary btn--block">Fill in the questionnaire for another traveller</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__grid">
+      <div>
+        <svg width="44" height="14" viewBox="0 0 44 14" fill="none" stroke="#F3EDE2" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="7" r="3.6"></circle><path d="M9.6 7 H38" stroke-linecap="round"></path><path d="M34 3 39.5 7 34 11" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <p class="footer__name">CESTA DOBRODRUHA</p>
+        <p class="footer__claim">Adventurers, not tourists.</p>
+      </div>
+      <div class="footer__legal">
+        <span>CESTA DOBRODRUHA TRAVEL AGENCY · ZDENĚK TEJKL · COMPANY ID 19804962</span>
+        <span>REGISTERED OFFICE: Č.P. 104, 517 36 OLEŠNICE, CZECHIA</span>
+        <span>TOUR OPERATED BY [TO BE ADDED] · INSOLVENCY PROTECTION: [TO BE ADDED]</span>
+        <div class="footer__docs">
+          <a href="../vop.html">Terms and Conditions (Czech)</a>
+          <a href="../ochrana-osobnich-udaju.html">Privacy Policy (Czech)</a>
+        </div>
+      </div>
+      <div class="footer__contact">
+        <a href="mailto:zdenek.tejkl@mensa.cz">zdenek.tejkl@mensa.cz</a>
+        <a href="tel:+420702967187">+420 702 967 187</a>
+        <div class="footer__social">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+        </div>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Cesta dobrodruha travel agency. We are a travel agent; we broker package tours under Czech Act No. 159/1999 Coll.</p>
+  </div>
+</footer>
+
+<script src="../js/vendor/qrcode.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

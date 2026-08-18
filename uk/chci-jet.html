@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Хочу поїхати | Марокко 2026 | Cesta dobrodruha</title>
+  <meta name="description" content="Заявка на експедицію Марокко 2026. Заповніть анкету та забронюйте місце завдатком; до 20. 9. він повертається повністю.">
+  <meta name="theme-color" content="#221E1A">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 12'%3E%3Cg fill='none' stroke='%23B4501E' stroke-width='2.4'%3E%3Ccircle cx='5' cy='6' r='3.1'/%3E%3Cpath d='M8.1 6 H29' stroke-linecap='round'/%3E%3Cpath d='M25.5 2.5 30.5 6 25.5 9.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="alternate" hreflang="cs" href="https://www.cestadobrodruha.cz/chci-jet.html">
+  <link rel="alternate" hreflang="en" href="https://www.cestadobrodruha.cz/en/chci-jet.html">
+  <link rel="alternate" hreflang="uk" href="https://www.cestadobrodruha.cz/uk/chci-jet.html">
+  <link rel="alternate" hreflang="sk" href="https://www.cestadobrodruha.cz/sk/chci-jet.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.cestadobrodruha.cz/chci-jet.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>:root { --cd-font-display: 'Inter', sans-serif; --cd-font-mono: 'Inter', sans-serif; }
+  .nav__logo span, .h2, .hero__title, .hero__wordmark { font-stretch: normal; }</style>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<header class="nav nav--page">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="Cesta dobrodruha, назад на головну сторінку">
+      <svg width="34" height="12" viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="5" cy="6" r="3.1"></circle><path d="M8.1 6 H29" stroke-linecap="round"></path><path d="M25.5 2.5 30.5 6 25.5 9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span>CESTA DOBRODRUHA</span>
+    </a>
+    <span class="nav__langs nav__langs--solo" aria-label="Мова сторінки">
+      <a href="../chci-jet.html" hreflang="cs">CZ</a>
+      <a href="../en/chci-jet.html" hreflang="en">EN</a>
+      <span class="is-active">UA</span>
+      <a href="../sk/chci-jet.html" hreflang="sk">SK</a>
+    </span>
+  </div>
+</header>
+
+<main class="apply">
+  <div class="apply__inner">
+    <a href="index.html" class="apply__back">
+      <svg width="34" height="12" viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1.8" style="transform:scaleX(-1)" aria-hidden="true"><circle cx="5" cy="6" r="3.1"></circle><path d="M8.1 6 H29" stroke-linecap="round"></path><path d="M25.5 2.5 30.5 6 25.5 9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      Назад на головну сторінку
+    </a>
+    <div class="final__card apply__card">
+      <form id="lead-form" novalidate>
+        <p class="apply__note">Анкету заповнює кожен учасник окремо. Завдаток за всіх можна надіслати одним платежем.</p>
+
+        <span class="form-heading">Контакти</span>
+        <div class="field">
+          <label for="lead-name">Імʼя та прізвище</label>
+          <input id="lead-name" name="name" type="text" autocomplete="name" class="input">
+          <span class="form-error" id="err-name" role="alert"></span>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="lead-vek">Вік</label>
+            <input id="lead-vek" name="vek" type="number" min="1" max="120" inputmode="numeric" class="input">
+            <span class="form-error" id="err-vek" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="lead-pocet">Бронювання на</label>
+            <div class="field-inline">
+              <input id="lead-pocet" name="pocet" type="number" min="1" max="10" value="1" inputmode="numeric" class="input input--num">
+              <span class="field-inline__suffix">осіб</span>
+            </div>
+            <span class="form-error" id="err-pocet" role="alert"></span>
+          </div>
+        </div>
+        <div class="field">
+          <span class="field__label">Стать</span>
+          <div class="choices">
+            <label><input type="radio" name="pohlavi" value="žena"> Жінка</label>
+            <label><input type="radio" name="pohlavi" value="muž"> Чоловік</label>
+            <label><input type="radio" name="pohlavi" value="nechci uvádět"> Не хочу вказувати</label>
+          </div>
+          <span class="form-error" id="err-pohlavi" role="alert"></span>
+        </div>
+        <div class="field">
+          <label for="lead-phone">Контактний телефон</label>
+          <input id="lead-phone" name="phone" type="tel" autocomplete="tel" class="input">
+          <span class="form-error" id="err-phone" role="alert"></span>
+        </div>
+        <div class="field">
+          <label for="lead-email">Контактний e-mail</label>
+          <input id="lead-email" name="email" type="email" autocomplete="email" class="input">
+          <span class="form-error" id="err-email" role="alert"></span>
+        </div>
+
+        <span class="form-heading">Програма</span>
+        <div class="field">
+          <span class="field__label">Хочу взяти участь у серфінгу</span>
+          <div class="choices">
+            <label><input type="radio" name="surf" value="ano"> Так</label>
+            <label><input type="radio" name="surf" value="ne"> Ні</label>
+          </div>
+          <span class="form-error" id="err-surf" role="alert"></span>
+        </div>
+        <div class="field">
+          <span class="field__label">У пустелю хочу вирушити</span>
+          <div class="choices">
+            <label><input type="radio" name="poust" value="velbloud"> На верблюді</label>
+            <label><input type="radio" name="poust" value="čtyřkolka"> На квадроциклі</label>
+          </div>
+          <span class="form-error" id="err-poust" role="alert"></span>
+        </div>
+        <div class="field">
+          <span class="field__label">Найбільше чекаю на <span class="field__optional">(оберіть будь-що)</span></span>
+          <div class="choices choices--wrap">
+            <label><input type="checkbox" name="tesim" value="markety a mediny"> Ринки та медини</label>
+            <label><input type="checkbox" name="tesim" value="hammam a lázně"> Хаммам і лазні</label>
+            <label><input type="checkbox" name="tesim" value="moře a surf"> Море та серфінг</label>
+            <label><input type="checkbox" name="tesim" value="trilobiti a sbírání fosilií"> Трилобіти та пошук скамʼянілостей</label>
+            <label><input type="checkbox" name="tesim" value="poušť a pozorování hvězd"> Пустеля та спостереження зірок</label>
+          </div>
+          <input id="lead-tesim-jine" type="text" class="input input--sub" placeholder="Щось інше? Напишіть тут.">
+        </div>
+        <div class="field">
+          <span class="field__label">Володію мовами <span class="field__optional">(оберіть мови)</span></span>
+          <div class="choices choices--wrap">
+            <label><input type="checkbox" name="jazyk" value="česky" checked> Чеська</label>
+            <label><input type="checkbox" name="jazyk" value="anglicky"> Англійська</label>
+            <label><input type="checkbox" name="jazyk" value="francouzsky"> Французька</label>
+            <label><input type="checkbox" name="jazyk" value="arabsky"> Арабська</label>
+            <label><input type="checkbox" name="jazyk" value="španělsky"> Іспанська</label>
+          </div>
+          <input id="lead-jazyky-jine" type="text" class="input input--sub" placeholder="Інші мови? Впишіть тут.">
+        </div>
+
+        <span class="form-heading">Про вас</span>
+        <div class="field">
+          <label for="lead-zdravi">Проблеми зі здоровʼям або обмеження <span class="field__optional">(необовʼязково)</span></label>
+          <textarea id="lead-zdravi" rows="2" class="input" placeholder="Усе, про що нам варто знати: алергії, ліки, обмеження руху…"></textarea>
+        </div>
+        <div class="field">
+          <label for="lead-jidlo">Харчові обмеження <span class="field__optional">(необовʼязково)</span></label>
+          <input id="lead-jidlo" type="text" class="input" placeholder="Вегетаріанство, безглютенова дієта, алергії…">
+        </div>
+        <div class="field">
+          <label for="lead-obavy">Чогось побоюєтеся? <span class="field__optional">(необовʼязково)</span></label>
+          <input id="lead-obavy" type="text" class="input" placeholder="Напишіть відверто, ми до цього підготуємось.">
+        </div>
+        <div class="field">
+          <label for="lead-note">Хочете про щось запитати? <span class="field__optional">(необовʼязково)</span></label>
+          <textarea id="lead-note" name="note" rows="2" class="input" placeholder="Напишіть усе, що вас цікавить про експедицію."></textarea>
+        </div>
+
+        <div class="field">
+          <label class="field__consent">
+            <input type="checkbox" id="lead-gdpr" name="gdpr">
+            <span>Погоджуюся на обробку <a href="../ochrana-osobnich-udaju.html">персональних даних</a> (документ чеською), зокрема даних про здоровʼя та харчові обмеження, які вказую добровільно задля безпечного проведення експедиції.</span>
+          </label>
+          <span class="form-error" id="err-gdpr" role="alert"></span>
+        </div>
+        <div class="field">
+          <label class="field__consent">
+            <input type="checkbox" id="lead-podminky" name="podminky">
+            <span>Погоджуюся із <a href="../vop.html">загальними умовами</a> (документ чеською).</span>
+          </label>
+          <span class="form-error" id="err-podminky" role="alert"></span>
+        </div>
+        <button type="submit" id="lead-submit" class="btn btn--primary btn--block">Хочу поїхати</button>
+        <span class="form-error" id="err-submit" role="alert"></span>
+      </form>
+      <div id="lead-sent" class="final__sent" hidden>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1E4E5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+        <h3>Дякуємо, анкету надіслано.</h3>
+        <p>Місце тримає завдаток. Надішліть його переказом із вашим змінним символом:</p>
+        <div class="pay-box">
+          <span>ЗАВДАТОК: <strong id="pay-amount">25 000 CZK</strong> / ОСОБА</span>
+          <span id="pay-total" hidden></span>
+          <span>РАХУНОК: <strong id="pay-acc">3704398014/3030</strong></span>
+          <span>ЗМІННИЙ СИМВОЛ (VS): <strong id="pay-vs"></strong></span>
+        </div>
+        <div class="pay-qr" id="pay-qr" hidden><img id="pay-qr-img" alt="QR-код для оплати завдатку"></div>
+        <p>Анкету заповнює кожен учасник окремо; завдаток за всіх можна надіслати одним платежем із цим змінним символом. Якщо завдаток за вашу групу вже надіслала людина, яка бронювала, повторно його не надсилайте. Протягом 24 годин звʼяжемося з підтвердженням і договором. До 20. 9. повертаємо завдаток повністю, без зайвих питань. Питання за телефоном +420 702 967 187.</p>
+        <button type="button" id="lead-another" class="btn btn--secondary btn--block">Заповнити анкету для наступного учасника</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__grid">
+      <div>
+        <svg width="44" height="14" viewBox="0 0 44 14" fill="none" stroke="#F3EDE2" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="7" r="3.6"></circle><path d="M9.6 7 H38" stroke-linecap="round"></path><path d="M34 3 39.5 7 34 11" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <p class="footer__name">CESTA DOBRODRUHA</p>
+        <p class="footer__claim">Шукачі пригод, а не туристи.</p>
+      </div>
+      <div class="footer__legal">
+        <span>ТУРАГЕНЦІЯ CESTA DOBRODRUHA · ZDENĚK TEJKL · IČO 19804962</span>
+        <span>АДРЕСА: Č.P. 104, 517 36 OLEŠNICE, ЧЕХІЯ</span>
+        <span>ТУР ОРГАНІЗУЄ ТУРОПЕРАТОР [БУДЕ ДОПОВНЕНО] · СТРАХУВАННЯ ВІД БАНКРУТСТВА: [БУДЕ ДОПОВНЕНО]</span>
+        <div class="footer__docs">
+          <a href="../vop.html">Загальні умови (чеською)</a>
+          <a href="../ochrana-osobnich-udaju.html">Захист персональних даних (чеською)</a>
+        </div>
+      </div>
+      <div class="footer__contact">
+        <a href="mailto:zdenek.tejkl@mensa.cz">zdenek.tejkl@mensa.cz</a>
+        <a href="tel:+420702967187">+420 702 967 187</a>
+        <div class="footer__social">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+        </div>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Cesta dobrodruha. Ми туристична агенція; продаж турів посередничимо згідно з чеським законом № 159/1999 Sb.</p>
+  </div>
+</footer>
+
+<script src="../js/vendor/qrcode.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

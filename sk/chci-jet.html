@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="sk">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Chci jet | Maroko 2026 | Cesta dobrodruha</title>
-  <meta name="description" content="Přihláška na výpravu Maroko 2026. Vyplňte dotazník a rezervujte si místo zálohou; do 20. 9. je vratná v plné výši.">
+  <title>Chcem ísť | Maroko 2026 | Cesta dobrodruha</title>
+  <meta name="description" content="Prihláška na výpravu Maroko 2026. Vyplňte dotazník a rezervujte si miesto zálohou; do 20. 9. je vratná v plnej výške.">
   <meta name="theme-color" content="#221E1A">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 12'%3E%3Cg fill='none' stroke='%23B4501E' stroke-width='2.4'%3E%3Ccircle cx='5' cy='6' r='3.1'/%3E%3Cpath d='M8.1 6 H29' stroke-linecap='round'/%3E%3Cpath d='M25.5 2.5 30.5 6 25.5 9.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="alternate" hreflang="cs" href="https://www.cestadobrodruha.cz/chci-jet.html">
@@ -15,21 +15,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 
 <header class="nav nav--page">
   <div class="nav__inner">
-    <a href="index.html" class="nav__logo" aria-label="Cesta dobrodruha, zpět na hlavní stránku">
+    <a href="index.html" class="nav__logo" aria-label="Cesta dobrodruha, späť na hlavnú stránku">
       <svg width="34" height="12" viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="5" cy="6" r="3.1"></circle><path d="M8.1 6 H29" stroke-linecap="round"></path><path d="M25.5 2.5 30.5 6 25.5 9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       <span>CESTA DOBRODRUHA</span>
     </a>
     <span class="nav__langs nav__langs--solo" aria-label="Jazyk stránky">
-      <span class="is-active">CZ</span>
-      <a href="en/chci-jet.html" hreflang="en">EN</a>
-      <a href="uk/chci-jet.html" hreflang="uk">UA</a>
-      <a href="sk/chci-jet.html" hreflang="sk">SK</a>
+      <a href="../chci-jet.html" hreflang="cs">CZ</a>
+      <a href="../en/chci-jet.html" hreflang="en">EN</a>
+      <a href="../uk/chci-jet.html" hreflang="uk">UA</a>
+      <span class="is-active">SK</span>
     </span>
   </div>
 </header>
@@ -38,141 +38,141 @@
   <div class="apply__inner">
     <a href="index.html" class="apply__back">
       <svg width="34" height="12" viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1.8" style="transform:scaleX(-1)" aria-hidden="true"><circle cx="5" cy="6" r="3.1"></circle><path d="M8.1 6 H29" stroke-linecap="round"></path><path d="M25.5 2.5 30.5 6 25.5 9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      Zpět na hlavní stránku
+      Späť na hlavnú stránku
     </a>
     <div class="final__card apply__card">
       <form id="lead-form" novalidate>
-        <p class="apply__note">Dotazník vyplní každý účastník zvlášť. Zálohu za všechny můžete poslat naráz.</p>
+        <p class="apply__note">Dotazník vyplní každý účastník zvlášť. Zálohu za všetkých môžete poslať naraz.</p>
 
         <span class="form-heading">Kontakt</span>
         <div class="field">
-          <label for="lead-name">Jméno a příjmení</label>
+          <label for="lead-name">Meno a priezvisko</label>
           <input id="lead-name" name="name" type="text" autocomplete="name" class="input">
           <span class="form-error" id="err-name" role="alert"></span>
         </div>
         <div class="field-row">
           <div class="field">
-            <label for="lead-vek">Věk</label>
+            <label for="lead-vek">Vek</label>
             <input id="lead-vek" name="vek" type="number" min="1" max="120" inputmode="numeric" class="input">
             <span class="form-error" id="err-vek" role="alert"></span>
           </div>
           <div class="field">
-            <label for="lead-pocet">Rezervace pro</label>
+            <label for="lead-pocet">Rezervácia pre</label>
             <div class="field-inline">
               <input id="lead-pocet" name="pocet" type="number" min="1" max="10" value="1" inputmode="numeric" class="input input--num">
-              <span class="field-inline__suffix">osob</span>
+              <span class="field-inline__suffix">osôb</span>
             </div>
             <span class="form-error" id="err-pocet" role="alert"></span>
           </div>
         </div>
         <div class="field">
-          <span class="field__label">Pohlaví</span>
+          <span class="field__label">Pohlavie</span>
           <div class="choices">
             <label><input type="radio" name="pohlavi" value="žena"> Žena</label>
             <label><input type="radio" name="pohlavi" value="muž"> Muž</label>
-            <label><input type="radio" name="pohlavi" value="nechci uvádět"> Nechci uvádět</label>
+            <label><input type="radio" name="pohlavi" value="nechci uvádět"> Nechcem uvádzať</label>
           </div>
           <span class="form-error" id="err-pohlavi" role="alert"></span>
         </div>
         <div class="field">
-          <label for="lead-phone">Kontaktní telefon</label>
+          <label for="lead-phone">Kontaktný telefón</label>
           <input id="lead-phone" name="phone" type="tel" autocomplete="tel" class="input">
           <span class="form-error" id="err-phone" role="alert"></span>
         </div>
         <div class="field">
-          <label for="lead-email">Kontaktní e-mail</label>
+          <label for="lead-email">Kontaktný e-mail</label>
           <input id="lead-email" name="email" type="email" autocomplete="email" class="input">
           <span class="form-error" id="err-email" role="alert"></span>
         </div>
 
         <span class="form-heading">Program</span>
         <div class="field">
-          <span class="field__label">Chci se účastnit surfování</span>
+          <span class="field__label">Chcem sa zúčastniť surfovania</span>
           <div class="choices">
-            <label><input type="radio" name="surf" value="ano"> Ano</label>
-            <label><input type="radio" name="surf" value="ne"> Ne</label>
+            <label><input type="radio" name="surf" value="ano"> Áno</label>
+            <label><input type="radio" name="surf" value="ne"> Nie</label>
           </div>
           <span class="form-error" id="err-surf" role="alert"></span>
         </div>
         <div class="field">
-          <span class="field__label">Do pouště chci vyrazit</span>
+          <span class="field__label">Do púšte chcem vyraziť</span>
           <div class="choices">
-            <label><input type="radio" name="poust" value="velbloud"> Na velbloudu</label>
-            <label><input type="radio" name="poust" value="čtyřkolka"> Na čtyřkolce</label>
+            <label><input type="radio" name="poust" value="velbloud"> Na ťave</label>
+            <label><input type="radio" name="poust" value="čtyřkolka"> Na štvorkolke</label>
           </div>
           <span class="form-error" id="err-poust" role="alert"></span>
         </div>
         <div class="field">
-          <span class="field__label">Hlavně se těším na <span class="field__optional">(vyberte cokoli)</span></span>
+          <span class="field__label">Hlavne sa teším na <span class="field__optional">(vyberte čokoľvek)</span></span>
           <div class="choices choices--wrap">
-            <label><input type="checkbox" name="tesim" value="markety a mediny"> Markety a mediny</label>
-            <label><input type="checkbox" name="tesim" value="hammam a lázně"> Hammam a lázně</label>
-            <label><input type="checkbox" name="tesim" value="moře a surf"> Moře a surf</label>
-            <label><input type="checkbox" name="tesim" value="trilobiti a sbírání fosilií"> Trilobiti a sbírání fosilií</label>
-            <label><input type="checkbox" name="tesim" value="poušť a pozorování hvězd"> Poušť a pozorování hvězd</label>
+            <label><input type="checkbox" name="tesim" value="markety a mediny"> Trhy a mediny</label>
+            <label><input type="checkbox" name="tesim" value="hammam a lázně"> Hammam a kúpele</label>
+            <label><input type="checkbox" name="tesim" value="moře a surf"> More a surf</label>
+            <label><input type="checkbox" name="tesim" value="trilobiti a sbírání fosilií"> Trilobity a zbieranie fosílií</label>
+            <label><input type="checkbox" name="tesim" value="poušť a pozorování hvězd"> Púšť a pozorovanie hviezd</label>
           </div>
-          <input id="lead-tesim-jine" type="text" class="input input--sub" placeholder="Něco jiného? Napište sem.">
+          <input id="lead-tesim-jine" type="text" class="input input--sub" placeholder="Niečo iné? Napíšte sem.">
         </div>
         <div class="field">
-          <span class="field__label">Mluvím <span class="field__optional">(vyberte jazyky)</span></span>
+          <span class="field__label">Hovorím <span class="field__optional">(vyberte jazyky)</span></span>
           <div class="choices choices--wrap">
             <label><input type="checkbox" name="jazyk" value="česky" checked> Česky</label>
             <label><input type="checkbox" name="jazyk" value="anglicky"> Anglicky</label>
-            <label><input type="checkbox" name="jazyk" value="francouzsky"> Francouzsky</label>
+            <label><input type="checkbox" name="jazyk" value="francouzsky"> Francúzsky</label>
             <label><input type="checkbox" name="jazyk" value="arabsky"> Arabsky</label>
-            <label><input type="checkbox" name="jazyk" value="španělsky"> Španělsky</label>
+            <label><input type="checkbox" name="jazyk" value="španělsky"> Španielsky</label>
           </div>
-          <input id="lead-jazyky-jine" type="text" class="input input--sub" placeholder="Jiné jazyky? Vypište sem.">
+          <input id="lead-jazyky-jine" type="text" class="input input--sub" placeholder="Iné jazyky? Vypíšte sem.">
         </div>
 
         <span class="form-heading">O vás</span>
         <div class="field">
-          <label for="lead-zdravi">Zdravotní potíže nebo omezení <span class="field__optional">(nepovinné)</span></label>
-          <textarea id="lead-zdravi" rows="2" class="input" placeholder="Cokoli, o čem bychom měli vědět: alergie, léky, omezení pohybu…"></textarea>
+          <label for="lead-zdravi">Zdravotné ťažkosti alebo obmedzenia <span class="field__optional">(nepovinné)</span></label>
+          <textarea id="lead-zdravi" rows="2" class="input" placeholder="Čokoľvek, o čom by sme mali vedieť: alergie, lieky, obmedzenia pohybu…"></textarea>
         </div>
         <div class="field">
-          <label for="lead-jidlo">Potravinová omezení <span class="field__optional">(nepovinné)</span></label>
-          <input id="lead-jidlo" type="text" class="input" placeholder="Vegetariánství, bezlepková dieta, alergie…">
+          <label for="lead-jidlo">Potravinové obmedzenia <span class="field__optional">(nepovinné)</span></label>
+          <input id="lead-jidlo" type="text" class="input" placeholder="Vegetariánstvo, bezlepková diéta, alergie…">
         </div>
         <div class="field">
-          <label for="lead-obavy">Bojíte se něčeho? <span class="field__optional">(nepovinné)</span></label>
-          <input id="lead-obavy" type="text" class="input" placeholder="Napište to na rovinu, připravíme se na to.">
+          <label for="lead-obavy">Bojíte sa niečoho? <span class="field__optional">(nepovinné)</span></label>
+          <input id="lead-obavy" type="text" class="input" placeholder="Napíšte to na rovinu, pripravíme sa na to.">
         </div>
         <div class="field">
-          <label for="lead-note">Chcete se na něco zeptat? <span class="field__optional">(nepovinné)</span></label>
-          <textarea id="lead-note" name="note" rows="2" class="input" placeholder="Napište cokoli, co vás o výpravě zajímá."></textarea>
+          <label for="lead-note">Chcete sa na niečo opýtať? <span class="field__optional">(nepovinné)</span></label>
+          <textarea id="lead-note" name="note" rows="2" class="input" placeholder="Napíšte čokoľvek, čo vás o výprave zaujíma."></textarea>
         </div>
 
         <div class="field">
           <label class="field__consent">
             <input type="checkbox" id="lead-gdpr" name="gdpr">
-            <span>Souhlasím se zpracováním <a href="ochrana-osobnich-udaju.html">osobních údajů</a>, včetně údajů o zdravotních a potravinových omezeních, která dobrovolně uvádím kvůli bezpečnému zajištění výpravy.</span>
+            <span>Súhlasím so spracovaním <a href="../ochrana-osobnich-udaju.html">osobných údajov</a> (dokument je v češtine), vrátane údajov o zdravotných a potravinových obmedzeniach, ktoré dobrovoľne uvádzam kvôli bezpečnému zaisteniu výpravy.</span>
           </label>
           <span class="form-error" id="err-gdpr" role="alert"></span>
         </div>
         <div class="field">
           <label class="field__consent">
             <input type="checkbox" id="lead-podminky" name="podminky">
-            <span>Souhlasím s <a href="vop.html">všeobecnými obchodními podmínkami</a>.</span>
+            <span>Súhlasím so <a href="../vop.html">všeobecnými obchodnými podmienkami</a> (dokument je v češtine).</span>
           </label>
           <span class="form-error" id="err-podminky" role="alert"></span>
         </div>
-        <button type="submit" id="lead-submit" class="btn btn--primary btn--block">Chci jet</button>
+        <button type="submit" id="lead-submit" class="btn btn--primary btn--block">Chcem ísť</button>
         <span class="form-error" id="err-submit" role="alert"></span>
       </form>
       <div id="lead-sent" class="final__sent" hidden>
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1E4E5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-        <h3>Díky, dotazník je odeslaný.</h3>
-        <p>Místo vám drží záloha. Pošlete ji převodem s vaším variabilním symbolem:</p>
+        <h3>Vďaka, dotazník je odoslaný.</h3>
+        <p>Miesto vám drží záloha. Pošlite ju prevodom s vaším variabilným symbolom:</p>
         <div class="pay-box">
           <span>ZÁLOHA: <strong id="pay-amount">25 000 KČ</strong> / OSOBA</span>
           <span id="pay-total" hidden></span>
           <span>ÚČET: <strong id="pay-acc">3704398014/3030</strong></span>
-          <span>VARIABILNÍ SYMBOL: <strong id="pay-vs"></strong></span>
+          <span>VARIABILNÝ SYMBOL: <strong id="pay-vs"></strong></span>
         </div>
-        <div class="pay-qr" id="pay-qr" hidden><img id="pay-qr-img" alt="QR kód pro platbu zálohy"></div>
-        <p>Dotazník vyplní každý účastník zvlášť; zálohu za všechny můžete poslat naráz pod tímto variabilním symbolem. Pokud už zálohu za vaši skupinu poslal ten, kdo rezervoval, znovu ji neposílejte. Do 24 hodin se ozveme s potvrzením a smlouvou o zájezdu. Do 20. 9. zálohu vracíme celou, bez otázek. Máte-li dotaz, volejte +420 702 967 187.</p>
-        <button type="button" id="lead-another" class="btn btn--secondary btn--block">Vyplnit dotazník pro dalšího cestujícího</button>
+        <div class="pay-qr" id="pay-qr" hidden><img id="pay-qr-img" alt="QR kód na platbu zálohy"></div>
+        <p>Dotazník vyplní každý účastník zvlášť; zálohu za všetkých môžete poslať naraz pod týmto variabilným symbolom. Ak zálohu za vašu skupinu už poslal ten, kto rezervoval, znova ju neposielajte. Do 24 hodín sa ozveme s potvrdením a zmluvou o zájazde. Do 20. 9. zálohu vraciame celú, bez otázok. Ak máte otázku, volajte +420 702 967 187.</p>
+        <button type="button" id="lead-another" class="btn btn--secondary btn--block">Vyplniť dotazník pre ďalšieho cestujúceho</button>
       </div>
     </div>
   </div>
@@ -184,15 +184,15 @@
       <div>
         <svg width="44" height="14" viewBox="0 0 44 14" fill="none" stroke="#F3EDE2" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="7" r="3.6"></circle><path d="M9.6 7 H38" stroke-linecap="round"></path><path d="M34 3 39.5 7 34 11" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         <p class="footer__name">CA CESTA DOBRODRUHA</p>
-        <p class="footer__claim">Dobrodruzi, ne turisté.</p>
+        <p class="footer__claim">Dobrodruhovia, nie turisti.</p>
       </div>
       <div class="footer__legal">
         <span>CA CESTA DOBRODRUHA · ZDENĚK TEJKL · IČO 19804962</span>
         <span>SÍDLO: Č.P. 104, 517 36 OLEŠNICE</span>
-        <span>ZÁJEZD POŘÁDÁ CK [DOPLNIT] · POJIŠTĚNÍ PRO PŘÍPAD ÚPADKU: [DOPLNIT]</span>
+        <span>ZÁJAZD USPORADÚVA CK [DOPLNIŤ] · POISTENIE PRE PRÍPAD ÚPADKU: [DOPLNIŤ]</span>
         <div class="footer__docs">
-          <a href="vop.html">Všeobecné obchodní podmínky</a>
-          <a href="ochrana-osobnich-udaju.html">Ochrana osobních údajů</a>
+          <a href="../vop.html">Všeobecné obchodné podmienky (v češtine)</a>
+          <a href="../ochrana-osobnich-udaju.html">Ochrana osobných údajov (v češtine)</a>
         </div>
       </div>
       <div class="footer__contact">
@@ -204,11 +204,11 @@
         </div>
       </div>
     </div>
-    <p class="footer__copy">© 2026 CA Cesta dobrodruha. Jsme cestovní agentura; prodej zájezdů zprostředkováváme podle zákona č. 159/1999 Sb.</p>
+    <p class="footer__copy">© 2026 CA Cesta dobrodruha. Sme cestovná agentúra; predaj zájazdov sprostredkúvame podľa českého zákona č. 159/1999 Zb.</p>
   </div>
 </footer>
 
-<script src="js/vendor/qrcode.js"></script>
-<script src="js/main.js"></script>
+<script src="../js/vendor/qrcode.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>
