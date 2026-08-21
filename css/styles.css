@@ -849,6 +849,32 @@ textarea.input { resize: vertical; }
 
 .price__head { text-align: center; }
 
+.price__badge {
+  display: inline-block;
+  margin-bottom: 18px;
+  border-radius: var(--cd-radius);
+  background: var(--cd-terakota);
+  padding: 8px 14px;
+  font-family: var(--cd-font-mono);
+  font-weight: 700;
+  font-stretch: 125%;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--cd-pisek);
+  text-transform: uppercase;
+}
+
+.price__old-label {
+  display: block;
+  font-family: var(--cd-font-mono);
+  font-weight: 500;
+  font-size: clamp(12px, 1.3vw, 13px);
+  letter-spacing: 0.1em;
+  color: var(--cd-kamen);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
 .price__old {
   display: block;
   font-family: var(--cd-font-mono);
