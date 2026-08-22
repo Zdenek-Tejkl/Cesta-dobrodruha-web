@@ -238,6 +238,16 @@ textarea.input { resize: vertical; }
 
 .nav__langs--solo { margin-left: auto; }
 
+/* dotyková plocha alespoň 32 px, ačkoli text je malý (WCAG 2.5.8) */
+.nav__langs a:not(.btn),
+.nav__langs .is-active {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+}
+
 .nav__langs a:not(.btn) { padding: 4px 4px; opacity: 0.7; }
 .nav__langs a:not(.btn):hover { opacity: 1; }
 .nav__langs .is-active { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
@@ -302,9 +312,14 @@ textarea.input { resize: vertical; }
 
 .nav__menu a.nav__menu-last { border-bottom: none; }
 
-@media (max-width: 767px) {
+/* Plná lišta potřebuje 888 px v češtině a 981 px v ukrajinštině; pod 1024 px
+   se nevejde a ořezávala by tlačítko, proto se do té šířky používá burger. */
+@media (max-width: 1023px) {
   .nav__links { display: none; }
   .nav__mobile { display: flex; gap: 10px; }
+}
+
+@media (max-width: 767px) {
   .nav__inner { gap: 10px; padding: 0 14px; }
   .nav__logo { gap: 7px; }
   .nav__logo svg { width: 28px; }
@@ -1211,6 +1226,8 @@ textarea.input { resize: vertical; }
   display: flex;
   gap: 8px;
   align-items: center;
+  /* alespoň 24 px na výšku, aby se dalo pohodlně trefit prstem (WCAG 2.5.8) */
+  min-height: 24px;
   font-family: var(--cd-font-text);
   font-weight: 400;
   font-size: 15.5px;
@@ -1279,6 +1296,7 @@ textarea.input { resize: vertical; }
 .final__route { margin-top: 36px; }
 
 .final__card {
+  box-sizing: border-box;
   background: var(--cd-bila);
   color: var(--cd-uhel);
   border-radius: var(--cd-radius);

@@ -104,6 +104,8 @@
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function isMobile() { return window.innerWidth < 768; }
+  /* musí odpovídat breakpointu burger navigace v CSS */
+  function isBurgerNav() { return window.innerWidth < 1024; }
 
   /* ---------- navigace ---------- */
 
@@ -179,7 +181,7 @@
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', function () {
-    if (menuOpen && !isMobile()) setMenu(false);
+    if (menuOpen && !isBurgerNav()) setMenu(false);
     onScroll();
   });
 
