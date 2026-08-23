@@ -1,0 +1,4 @@
+# Skills a nástroje pro agenty: patří do repozitáře, ale ne na web
+.agents/
+.claude/
+skills-lock.json
