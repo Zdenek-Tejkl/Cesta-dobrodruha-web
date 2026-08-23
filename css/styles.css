@@ -35,7 +35,49 @@ body {
   overflow-x: clip;
 }
 
-img { display: block; max-width: 100%; }
+/* height: auto je nutné, protože obrázky mají v HTML uvedené width a height
+   kvůli rezervaci místa; bez něj by se při zmenšení deformovaly */
+img { display: block; max-width: 100%; height: auto; }
+
+/* Text jen pro odečítače obrazovky: vizuálně skrytý, ale čitelný pro
+   asistivní technologie. Slouží k doplnění nadpisů, které návrh nezobrazuje. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Odkaz pro přeskočení navigace: schovaný, dokud na něj někdo nepřejde
+   tabulátorem. Bez něj musí uživatel klávesnice na každé stránce
+   proklikat celé menu, než se dostane k obsahu. */
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  z-index: 100;
+  background: var(--cd-uhel);
+  color: var(--cd-pisek);
+  font-family: var(--cd-font-display);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 16px;
+  border-radius: var(--cd-radius);
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 8px;
+  color: var(--cd-pisek);
+  outline: 2px solid var(--cd-terakota);
+  outline-offset: 2px;
+}
 [hidden] { display: none !important; }
 a { color: var(--cd-hlubina); }
 a:hover { color: var(--cd-terakota-tmava); }
@@ -78,7 +120,13 @@ h1, h2, h3, p { margin: 0; }
   border: none;
   cursor: pointer;
   white-space: nowrap;
+  /* ruší prodlevu 300 ms, kterou některé mobilní prohlížeče čekají na dvojklik */
+  touch-action: manipulation;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.08s ease;
 }
+
+/* hmatová odezva na stisk, hlavně na dotykových zařízeních, kde hover není */
+.btn:active { transform: translateY(1px); }
 
 .btn--primary { background: var(--cd-terakota); color: var(--cd-bila); }
 .btn--primary:hover { background: var(--cd-terakota-tmava); color: var(--cd-bila); }
@@ -1172,7 +1220,9 @@ textarea.input { resize: vertical; }
 .apply {
   background: var(--cd-uhel);
   padding: calc(var(--nav-h) + clamp(28px, 5vw, 56px)) 24px clamp(64px, 9vw, 112px);
+  /* dvh místo vh: na iOS Safari se stránka nepřepočítává při skrytí adresního řádku */
   min-height: 100vh;
+  min-height: 100dvh;
   box-sizing: border-box;
 }
 
@@ -1366,6 +1416,9 @@ textarea.input { resize: vertical; }
 
 .pay-box strong { font-weight: 500; color: var(--cd-terakota-tmava); }
 
+/* h2 na stránce přihlášky, h3 v sekci s dotazem na hlavní stránce:
+   na obou místech jde o stejný nadpis potvrzení */
+.final__sent h2,
 .final__sent h3 {
   font-family: var(--cd-font-display);
   font-weight: 600;
@@ -1635,6 +1688,9 @@ textarea.input { resize: vertical; }
     transition: opacity 0.45s ease;
   }
   .hero__img { animation: none; }
+  /* barva se stále mění, jen bez posunu tlačítka */
+  .btn { transition: background 0.18s ease, color 0.18s ease; }
+  .btn:active { transform: none; }
 }
 
 .guide__img {

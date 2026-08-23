@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+<a href="#obsah" class="skip-link">Preskočiť na obsah</a>
+
 
 <header class="nav nav--page">
   <div class="nav__inner">
@@ -34,8 +36,9 @@
   </div>
 </header>
 
-<main class="apply">
+<main id="obsah" class="apply">
   <div class="apply__inner">
+    <h1 class="sr-only">Prihláška na výpravu do Maroka</h1>
     <a href="index.html" class="apply__back">
       <svg width="34" height="12" viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1.8" style="transform:scaleX(-1)" aria-hidden="true"><circle cx="5" cy="6" r="3.1"></circle><path d="M8.1 6 H29" stroke-linecap="round"></path><path d="M25.5 2.5 30.5 6 25.5 9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       Späť na hlavnú stránku
@@ -44,7 +47,7 @@
       <form id="lead-form" novalidate>
         <p class="apply__note">Dotazník vyplní každý účastník zvlášť. Zálohu za všetkých môžete poslať naraz.</p>
 
-        <span class="form-heading">Kontakt</span>
+        <h2 class="form-heading">Kontakt</h2>
         <div class="field">
           <label for="lead-name">Meno a priezvisko</label>
           <input id="lead-name" name="name" type="text" autocomplete="name" class="input">
@@ -85,7 +88,7 @@
           <span class="form-error" id="err-email" role="alert"></span>
         </div>
 
-        <span class="form-heading">Program</span>
+        <h2 class="form-heading">Program</h2>
         <div class="field">
           <span class="field__label">Chcem sa zúčastniť surfovania</span>
           <div class="choices">
@@ -125,7 +128,7 @@
           <input id="lead-jazyky-jine" type="text" class="input input--sub" placeholder="Iné jazyky? Vypíšte sem.">
         </div>
 
-        <span class="form-heading">O vás</span>
+        <h2 class="form-heading">O vás</h2>
         <div class="field">
           <label for="lead-zdravi">Zdravotné ťažkosti alebo obmedzenia <span class="field__optional">(nepovinné)</span></label>
           <textarea id="lead-zdravi" rows="2" class="input" placeholder="Čokoľvek, o čom by sme mali vedieť: alergie, lieky, obmedzenia pohybu…"></textarea>
@@ -162,7 +165,7 @@
       </form>
       <div id="lead-sent" class="final__sent" hidden>
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1E4E5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-        <h3>Vďaka, dotazník je odoslaný.</h3>
+        <h2>Vďaka, dotazník je odoslaný.</h2>
         <p>Miesto vám drží záloha. Pošlite ju prevodom s vaším variabilným symbolom:</p>
         <div class="pay-box">
           <span>ZÁLOHA: <strong id="pay-amount">25 000 KČ</strong> / OSOBA</span>

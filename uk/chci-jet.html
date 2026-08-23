@@ -20,6 +20,8 @@
   .nav__logo span, .h2, .hero__title, .hero__wordmark { font-stretch: normal; }</style>
 </head>
 <body>
+<a href="#obsah" class="skip-link">Перейти до вмісту</a>
+
 
 <header class="nav nav--page">
   <div class="nav__inner">
@@ -36,8 +38,9 @@
   </div>
 </header>
 
-<main class="apply">
+<main id="obsah" class="apply">
   <div class="apply__inner">
+    <h1 class="sr-only">Заявка на експедицію до Марокко</h1>
     <a href="index.html" class="apply__back">
       <svg width="34" height="12" viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1.8" style="transform:scaleX(-1)" aria-hidden="true"><circle cx="5" cy="6" r="3.1"></circle><path d="M8.1 6 H29" stroke-linecap="round"></path><path d="M25.5 2.5 30.5 6 25.5 9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       Назад на головну сторінку
@@ -46,7 +49,7 @@
       <form id="lead-form" novalidate>
         <p class="apply__note">Анкету заповнює кожен учасник окремо. Завдаток за всіх можна надіслати одним платежем.</p>
 
-        <span class="form-heading">Контакти</span>
+        <h2 class="form-heading">Контакти</h2>
         <div class="field">
           <label for="lead-name">Імʼя та прізвище</label>
           <input id="lead-name" name="name" type="text" autocomplete="name" class="input">
@@ -87,7 +90,7 @@
           <span class="form-error" id="err-email" role="alert"></span>
         </div>
 
-        <span class="form-heading">Програма</span>
+        <h2 class="form-heading">Програма</h2>
         <div class="field">
           <span class="field__label">Хочу взяти участь у серфінгу</span>
           <div class="choices">
@@ -127,7 +130,7 @@
           <input id="lead-jazyky-jine" type="text" class="input input--sub" placeholder="Інші мови? Впишіть тут.">
         </div>
 
-        <span class="form-heading">Про вас</span>
+        <h2 class="form-heading">Про вас</h2>
         <div class="field">
           <label for="lead-zdravi">Проблеми зі здоровʼям або обмеження <span class="field__optional">(необовʼязково)</span></label>
           <textarea id="lead-zdravi" rows="2" class="input" placeholder="Усе, про що нам варто знати: алергії, ліки, обмеження руху…"></textarea>
@@ -164,7 +167,7 @@
       </form>
       <div id="lead-sent" class="final__sent" hidden>
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1E4E5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-        <h3>Дякуємо, анкету надіслано.</h3>
+        <h2>Дякуємо, анкету надіслано.</h2>
         <p>Місце тримає завдаток. Надішліть його переказом із вашим змінним символом:</p>
         <div class="pay-box">
           <span>ЗАВДАТОК: <strong id="pay-amount">25 000 CZK</strong> / ОСОБА</span>
