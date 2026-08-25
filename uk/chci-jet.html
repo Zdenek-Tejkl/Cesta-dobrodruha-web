@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Хочу поїхати | Марокко 2026 | Cesta dobrodruha</title>
-  <meta name="description" content="Заявка на експедицію Марокко 2026. Заповніть анкету та забронюйте місце завдатком; до 20. 9. він повертається повністю.">
+  <title>Хочу поїхати | Марокко 2026 і 2027 | Cesta dobrodruha</title>
+  <meta name="description" content="Заявка на експедицію до Марокко, термін жовтень 2026 або березень 2027. Заповніть анкету та забронюйте місце завдатком; до дати біля вашого терміну він повертається повністю.">
   <meta name="theme-color" content="#221E1A">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 12'%3E%3Cg fill='none' stroke='%23B4501E' stroke-width='2.4'%3E%3Ccircle cx='5' cy='6' r='3.1'/%3E%3Cpath d='M8.1 6 H29' stroke-linecap='round'/%3E%3Cpath d='M25.5 2.5 30.5 6 25.5 9.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="alternate" hreflang="cs" href="https://www.cestadobrodruha.cz/chci-jet.html">
@@ -48,6 +48,16 @@
     <div class="final__card apply__card">
       <form id="lead-form" novalidate>
         <p class="apply__note">Анкету заповнює кожен учасник окремо. Завдаток за всіх можна надіслати одним платежем.</p>
+
+        <h2 class="form-heading">Термін</h2>
+        <div class="field">
+          <span class="field__label">Коли хочете поїхати?</span>
+          <div class="choices choices--wrap">
+            <label><input type="radio" name="termin" value="maroko-2026"> 28. 10. – 11. 11. 2026</label>
+            <label><input type="radio" name="termin" value="maroko-2027-brezen"> 13. 3. – 27. 3. 2027</label>
+          </div>
+          <span class="form-error" id="err-termin" role="alert"></span>
+        </div>
 
         <h2 class="form-heading">Контакти</h2>
         <div class="field">
@@ -170,13 +180,14 @@
         <h2>Дякуємо, анкету надіслано.</h2>
         <p>Місце тримає завдаток. Надішліть його переказом із вашим змінним символом:</p>
         <div class="pay-box">
+          <span>ТЕРМІН: <strong id="pay-termin"></strong></span>
           <span>ЗАВДАТОК: <strong id="pay-amount">25 000 CZK</strong> / ОСОБА</span>
           <span id="pay-total" hidden></span>
           <span>РАХУНОК: <strong id="pay-acc">3704398014/3030</strong></span>
           <span>ЗМІННИЙ СИМВОЛ (VS): <strong id="pay-vs"></strong></span>
         </div>
         <div class="pay-qr" id="pay-qr" hidden><img id="pay-qr-img" alt="QR-код для оплати завдатку"></div>
-        <p>Анкету заповнює кожен учасник окремо; завдаток за всіх можна надіслати одним платежем із цим змінним символом. Якщо завдаток за вашу групу вже надіслала людина, яка бронювала, повторно його не надсилайте. Протягом 24 годин звʼяжемося з підтвердженням і договором. До 20. 9. повертаємо завдаток повністю, без зайвих питань. Питання за телефоном +420 702 967 187.</p>
+        <p>Анкету заповнює кожен учасник окремо; завдаток за всіх можна надіслати одним платежем із цим змінним символом. Якщо завдаток за вашу групу вже надіслала людина, яка бронювала, повторно його не надсилайте. Протягом 24 годин звʼяжемося з підтвердженням і договором. До дати, вказаної біля вашого терміну, повертаємо завдаток повністю, без зайвих питань (жовтень 2026 до 20. 9. 2026, березень 2027 до 1. 2. 2027). Питання за телефоном +420 702 967 187.</p>
         <button type="button" id="lead-another" class="btn btn--secondary btn--block">Заповнити анкету для наступного учасника</button>
       </div>
     </div>

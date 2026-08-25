@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Chcem ísť | Maroko 2026 | Cesta dobrodruha</title>
-  <meta name="description" content="Prihláška na výpravu Maroko 2026. Vyplňte dotazník a rezervujte si miesto zálohou; do 20. 9. je vratná v plnej výške.">
+  <title>Chcem ísť | Maroko 2026 a 2027 | Cesta dobrodruha</title>
+  <meta name="description" content="Prihláška na výpravu do Maroka, termín október 2026 alebo marec 2027. Vyplňte dotazník a rezervujte si miesto zálohou; do dátumu pri vašom termíne je vratná v plnej výške.">
   <meta name="theme-color" content="#221E1A">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 12'%3E%3Cg fill='none' stroke='%23B4501E' stroke-width='2.4'%3E%3Ccircle cx='5' cy='6' r='3.1'/%3E%3Cpath d='M8.1 6 H29' stroke-linecap='round'/%3E%3Cpath d='M25.5 2.5 30.5 6 25.5 9.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="alternate" hreflang="cs" href="https://www.cestadobrodruha.cz/chci-jet.html">
@@ -46,6 +46,16 @@
     <div class="final__card apply__card">
       <form id="lead-form" novalidate>
         <p class="apply__note">Dotazník vyplní každý účastník zvlášť. Zálohu za všetkých môžete poslať naraz.</p>
+
+        <h2 class="form-heading">Termín</h2>
+        <div class="field">
+          <span class="field__label">Kedy chcete ísť?</span>
+          <div class="choices choices--wrap">
+            <label><input type="radio" name="termin" value="maroko-2026"> 28. 10. – 11. 11. 2026</label>
+            <label><input type="radio" name="termin" value="maroko-2027-brezen"> 13. 3. – 27. 3. 2027</label>
+          </div>
+          <span class="form-error" id="err-termin" role="alert"></span>
+        </div>
 
         <h2 class="form-heading">Kontakt</h2>
         <div class="field">
@@ -168,13 +178,14 @@
         <h2>Vďaka, dotazník je odoslaný.</h2>
         <p>Miesto vám drží záloha. Pošlite ju prevodom s vaším variabilným symbolom:</p>
         <div class="pay-box">
+          <span>TERMÍN: <strong id="pay-termin"></strong></span>
           <span>ZÁLOHA: <strong id="pay-amount">25 000 KČ</strong> / OSOBA</span>
           <span id="pay-total" hidden></span>
           <span>ÚČET: <strong id="pay-acc">3704398014/3030</strong></span>
           <span>VARIABILNÝ SYMBOL: <strong id="pay-vs"></strong></span>
         </div>
         <div class="pay-qr" id="pay-qr" hidden><img id="pay-qr-img" alt="QR kód na platbu zálohy"></div>
-        <p>Dotazník vyplní každý účastník zvlášť; zálohu za všetkých môžete poslať naraz pod týmto variabilným symbolom. Ak zálohu za vašu skupinu už poslal ten, kto rezervoval, znova ju neposielajte. Do 24 hodín sa ozveme s potvrdením a zmluvou o zájazde. Do 20. 9. zálohu vraciame celú, bez otázok. Ak máte otázku, volajte +420 702 967 187.</p>
+        <p>Dotazník vyplní každý účastník zvlášť; zálohu za všetkých môžete poslať naraz pod týmto variabilným symbolom. Ak zálohu za vašu skupinu už poslal ten, kto rezervoval, znova ju neposielajte. Do 24 hodín sa ozveme s potvrdením a zmluvou o zájazde. Do dátumu uvedeného pri vašom termíne zálohu vraciame celú, bez otázok (október 2026 do 20. 9. 2026, marec 2027 do 1. 2. 2027). Ak máte otázku, volajte +420 702 967 187.</p>
         <button type="button" id="lead-another" class="btn btn--secondary btn--block">Vyplniť dotazník pre ďalšieho cestujúceho</button>
       </div>
     </div>

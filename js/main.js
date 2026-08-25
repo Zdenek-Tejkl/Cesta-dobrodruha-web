@@ -4,6 +4,8 @@
 
   var SUPABASE_URL = 'https://xpikyrtjmueeyqrpfoox.supabase.co';
   var SUPABASE_KEY = 'sb_publishable_l9O6G5ldcwcYixVOn1Xq9w_kJjdgCsg';
+  /* slug výpravy si nese samo radio s termínem v přihlášce; tenhle je výchozí,
+     když v URL ani ve formuláři termín není */
   var VYPRAVA_SLUG = 'maroko-2026';
   var VYPRAVA_ID = '79cca540-5dd4-4096-ad5a-c1c5b2290e07';
   /* platební údaje: po doplnění IBAN se u přihlášky zobrazí i QR platba */
@@ -18,6 +20,7 @@
       vsFallback: 'SDĚLÍME TELEFONICKY',
       totalFor: function (n, castka) { return 'CELKEM ZA ' + n + ' ' + (n < 5 ? 'OSOBY' : 'OSOB') + ': ' + castka; },
       sending: 'Odesílám…',
+      errTermin: 'Vyberte termín, na který se hlásíte.',
       errName: 'Doplňte jméno.',
       errVek: 'Doplňte věk.',
       errPocet: 'Doplňte počet osob, 1 až 10.',
@@ -39,6 +42,7 @@
       vsFallback: 'WE WILL CONFIRM IT BY PHONE',
       totalFor: function (n, castka) { return 'TOTAL FOR ' + n + ' PEOPLE: ' + castka; },
       sending: 'Sending…',
+      errTermin: 'Please choose the departure you are booking.',
       errName: 'Please fill in your name.',
       errVek: 'Please fill in your age.',
       errPocet: 'Please enter the number of people, 1 to 10.',
@@ -60,6 +64,7 @@
       vsFallback: 'ПОВІДОМИМО ТЕЛЕФОНОМ',
       totalFor: function (n, castka) { return 'РАЗОМ ЗА ' + n + ' ' + (n < 5 ? 'ОСОБИ' : 'ОСІБ') + ': ' + castka; },
       sending: 'Надсилаємо…',
+      errTermin: 'Оберіть термін, на який ви записуєтесь.',
       errName: 'Вкажіть, будь ласка, імʼя та прізвище.',
       errVek: 'Вкажіть, будь ласка, вік.',
       errPocet: 'Вкажіть кількість осіб, від 1 до 10.',
@@ -81,6 +86,7 @@
       vsFallback: 'OZNÁMIME TELEFONICKY',
       totalFor: function (n, castka) { return 'SPOLU ZA ' + n + ' ' + (n < 5 ? 'OSOBY' : 'OSÔB') + ': ' + castka; },
       sending: 'Odosielam…',
+      errTermin: 'Vyberte termín, na ktorý sa hlásite.',
       errName: 'Doplňte meno.',
       errVek: 'Doplňte vek.',
       errPocet: 'Doplňte počet osôb, 1 až 10.',
@@ -294,9 +300,14 @@
   var leadForm = document.getElementById('lead-form');
   var leadSent = document.getElementById('lead-sent');
 
-  function showLeadSent(vs, zalohaKc, pocet) {
+  function showLeadSent(vs, zalohaKc, pocet, terminText) {
     if (!leadForm || !leadSent) return;
     pocet = pocet || 1;
+    var terminEl = document.getElementById('pay-termin');
+    if (terminEl) {
+      terminEl.textContent = terminText || '';
+      if (terminEl.parentNode) terminEl.parentNode.hidden = !terminText;
+    }
     var vsEl = document.getElementById('pay-vs');
     var amountEl = document.getElementById('pay-amount');
     var totalEl = document.getElementById('pay-total');
@@ -345,6 +356,23 @@
     document.getElementById(id).textContent = msg || '';
   }
 
+  /* popisek vybraného termínu, ať ho vidí i na potvrzovací obrazovce */
+  function terminLabel() {
+    var el = document.querySelector('input[name="termin"]:checked');
+    var lbl = el && (el.closest ? el.closest('label') : el.parentNode);
+    return lbl ? lbl.textContent.trim() : '';
+  }
+
+  /* odkazy z karet termínů na hlavní stránce nesou ?termin=slug */
+  if (leadForm) {
+    var terminParam = /[?&]termin=([^&#]+)/.exec(window.location.search);
+    if (terminParam) {
+      var terminSlug = decodeURIComponent(terminParam[1]).replace(/[^a-z0-9-]/gi, '');
+      var terminRadio = terminSlug && document.querySelector('input[name="termin"][value="' + terminSlug + '"]');
+      if (terminRadio) terminRadio.checked = true;
+    }
+  }
+
   if (leadForm) leadForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = document.getElementById('lead-name').value;
@@ -353,6 +381,7 @@
     var note = document.getElementById('lead-note').value;
     var vek = parseInt(document.getElementById('lead-vek').value, 10);
     var pocet = parseInt(document.getElementById('lead-pocet').value, 10);
+    var termin = radioVal('termin');
     var pohlavi = radioVal('pohlavi');
     var surf = radioVal('surf');
     var poust = radioVal('poust');
@@ -366,6 +395,7 @@
     var submitBtn = document.getElementById('lead-submit');
 
     var ok = true;
+    if (!termin) { setErr('err-termin', T.errTermin); ok = false; } else setErr('err-termin');
     if (!name.trim()) { setErr('err-name', T.errName); ok = false; } else setErr('err-name');
     if (!vek || vek < 1 || vek > 120) { setErr('err-vek', T.errVek); ok = false; } else setErr('err-vek');
     if (!pocet || pocet < 1 || pocet > 10) { setErr('err-pocet', T.errPocet); ok = false; } else setErr('err-pocet');
@@ -395,7 +425,7 @@
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        p_slug: VYPRAVA_SLUG,
+        p_slug: termin || VYPRAVA_SLUG,
         p_jmeno: jmeno,
         p_prijmeni: prijmeni,
         p_email: email.trim(),
@@ -418,12 +448,13 @@
       if (!res.ok) throw new Error('http ' + res.status);
       return res.json();
     }).then(function (data) {
+      var terminText = terminLabel();
       try {
         localStorage.setItem('cd-maroko-lead', JSON.stringify({
-          ts: Date.now(), vs: data.vs, zaloha_kc: data.zaloha_kc, pocet: pocet
+          ts: Date.now(), vs: data.vs, zaloha_kc: data.zaloha_kc, pocet: pocet, termin: terminText
         }));
       } catch (err) {}
-      showLeadSent(data.vs, data.zaloha_kc, pocet);
+      showLeadSent(data.vs, data.zaloha_kc, pocet, terminText);
     }).catch(function () {
       submitBtn.disabled = false;
       submitBtn.textContent = leadBtnText;
@@ -551,7 +582,7 @@
     if (savedLead) {
       var lead = {};
       try { lead = JSON.parse(savedLead) || {}; } catch (err) {}
-      showLeadSent(lead.vs, lead.zaloha_kc, lead.pocet);
+      showLeadSent(lead.vs, lead.zaloha_kc, lead.pocet, lead.termin);
     }
     if (localStorage.getItem('cd-maroko-dotaz')) showDotazSent();
     if (localStorage.getItem('cd-maroko-pdf')) showPdfSent();

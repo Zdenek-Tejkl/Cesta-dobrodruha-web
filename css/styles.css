@@ -912,42 +912,6 @@ textarea.input { resize: vertical; }
 
 .price__head { text-align: center; }
 
-.price__badge {
-  display: inline-block;
-  margin-bottom: 18px;
-  border-radius: var(--cd-radius);
-  background: var(--cd-terakota);
-  padding: 8px 14px;
-  font-family: var(--cd-font-mono);
-  font-weight: 700;
-  font-stretch: 125%;
-  font-size: 13px;
-  letter-spacing: 0.1em;
-  color: var(--cd-pisek);
-  text-transform: uppercase;
-}
-
-.price__old-label {
-  display: block;
-  font-family: var(--cd-font-mono);
-  font-weight: 500;
-  font-size: clamp(12px, 1.3vw, 13px);
-  letter-spacing: 0.1em;
-  color: var(--cd-kamen);
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-
-.price__old {
-  display: block;
-  font-family: var(--cd-font-mono);
-  font-weight: 500;
-  font-size: clamp(17px, 2vw, 21px);
-  letter-spacing: 0.02em;
-  color: #B3261E;
-  text-decoration: line-through;
-}
-
 .price__new {
   display: block;
   font-family: var(--cd-font-mono);
@@ -959,6 +923,68 @@ textarea.input { resize: vertical; }
 }
 
 .price__terms { margin: 14px 0 0; font-size: 18px; }
+
+/* dva termíny, stejný program: karty vedle sebe, na mobilu pod sebou */
+
+.terms {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+  gap: clamp(16px, 2.4vw, 26px);
+  max-width: 860px;
+  margin: clamp(32px, 4.5vw, 52px) auto 0;
+  text-align: left;
+}
+
+.term {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+  border: 1px solid rgba(34, 30, 26, 0.16);
+  border-radius: var(--cd-radius);
+  background: var(--cd-pisek);
+  padding: clamp(20px, 2.6vw, 28px);
+}
+
+.term__tag {
+  align-self: flex-start;
+  border-radius: var(--cd-radius);
+  background: var(--cd-terakota);
+  padding: 5px 10px;
+  font-family: var(--cd-font-mono);
+  font-weight: 700;
+  font-stretch: 125%;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--cd-pisek);
+  text-transform: uppercase;
+}
+
+.term__tag--pozdejsi { background: var(--cd-hlubina); }
+
+.term__date {
+  font-family: var(--cd-font-mono);
+  font-weight: 600;
+  font-stretch: 110%;
+  font-size: clamp(20px, 2.5vw, 26px);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.term__meta {
+  margin: 0;
+  font-family: var(--cd-font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.05em;
+  color: var(--cd-kamen);
+  text-transform: uppercase;
+}
+
+.term__note { margin: 0; font-size: 16.5px; }
+
+/* tlačítko drží u spodní hrany, aby obě karty končily zarovnaně */
+.term__cta { margin-top: auto; }
 
 .price__cols {
   display: grid;
