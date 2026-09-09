@@ -986,6 +986,45 @@ textarea.input { resize: vertical; }
 /* tlačítko drží u spodní hrany, aby obě karty končily zarovnaně */
 .term__cta { margin-top: auto; }
 
+/* vyprodaný termín: přerušovaný rámeček místo plné karty, štítek v kameni */
+.term--full {
+  border-style: dashed;
+  background: transparent;
+}
+
+.term__tag--full { background: var(--cd-kamen); }
+
+.term__full {
+  margin: auto 0 0;
+  font-family: var(--cd-font-mono);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--cd-kamen);
+  text-transform: uppercase;
+}
+
+.terms__note {
+  max-width: 720px;
+  margin: clamp(26px, 3.6vw, 38px) auto 0;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* přihláška, když se nedá podat */
+.apply__full { text-align: center; }
+
+.apply__full h2 {
+  margin: 0 0 14px;
+  font-family: var(--cd-font-display);
+  font-weight: 600;
+  font-size: clamp(21px, 3vw, 27px);
+  line-height: 1.25;
+}
+
+.apply__full p { margin: 0 0 14px; }
+.apply__full .btn { margin-top: 8px; }
+
 .price__cols {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
