@@ -1011,6 +1011,12 @@ textarea.input { resize: vertical; }
   font-size: 18px;
 }
 
+/* vyprodaný termín ve výběru v přihlášce: nejde vybrat a je utlumený */
+.choices label:has(input:disabled) {
+  color: var(--cd-kamen);
+  cursor: not-allowed;
+}
+
 /* přihláška, když se nedá podat */
 .apply__full { text-align: center; }
 

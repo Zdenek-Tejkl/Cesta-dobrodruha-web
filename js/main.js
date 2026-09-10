@@ -369,7 +369,8 @@
     if (terminParam) {
       var terminSlug = decodeURIComponent(terminParam[1]).replace(/[^a-z0-9-]/gi, '');
       var terminRadio = terminSlug && document.querySelector('input[name="termin"][value="' + terminSlug + '"]');
-      if (terminRadio) terminRadio.checked = true;
+      /* vyprodaný termín nepředvybíráme, i kdyby na něj vedl starý odkaz */
+      if (terminRadio && !terminRadio.disabled) terminRadio.checked = true;
     }
   }
 

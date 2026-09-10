@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sold out | Morocco 2026 and 2027 | Cesta dobrodruha</title>
+  <title>Count me in | Morocco 2026 and 2027 | Cesta dobrodruha</title>
   <meta name="description" content="Application for the Morocco expedition, departing October 2026 or March 2027. Fill in the questionnaire and hold your place with a deposit; fully refundable until the date shown for your departure.">
   <meta name="theme-color" content="#221E1A">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 12'%3E%3Cg fill='none' stroke='%23B4501E' stroke-width='2.4'%3E%3Ccircle cx='5' cy='6' r='3.1'/%3E%3Cpath d='M8.1 6 H29' stroke-linecap='round'/%3E%3Cpath d='M25.5 2.5 30.5 6 25.5 9.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E">
@@ -44,21 +44,15 @@
       Back to the home page
     </a>
     <div class="final__card apply__card">
-      <div class="apply__full">
-        <h2>Both departures are sold out</h2>
-        <p>The October and the March departure are both full, so we are not taking applications right now. We are working on the next date.</p>
-        <p>Leave us your contact and we will get back to you as soon as we open it.</p>
-        <a href="index.html#formular" class="btn btn--primary btn--block">Tell me about the next date</a>
-      </div>
-      <form id="lead-form" novalidate hidden>
+      <form id="lead-form" novalidate>
         <p class="apply__note">Each traveller fills in their own questionnaire. The deposit for everyone can be sent in one payment.</p>
 
         <h2 class="form-heading">Departure</h2>
         <div class="field">
           <span class="field__label">Which departure do you want?</span>
           <div class="choices choices--wrap">
-            <label><input type="radio" name="termin" value="maroko-2026"> 28 Oct – 11 Nov 2026</label>
-            <label><input type="radio" name="termin" value="maroko-2027-brezen"> 13 Mar – 27 Mar 2027</label>
+            <label><input type="radio" name="termin" value="maroko-2026" disabled> 28 Oct – 11 Nov 2026 — sold out</label>
+            <label><input type="radio" name="termin" value="maroko-2027-brezen" checked> 13 Mar – 27 Mar 2027</label>
           </div>
           <span class="form-error" id="err-termin" role="alert"></span>
         </div>
@@ -191,7 +185,7 @@
           <span>PAYMENT REFERENCE (VS): <strong id="pay-vs"></strong></span>
         </div>
         <div class="pay-qr" id="pay-qr" hidden><img id="pay-qr-img" alt="QR code for the deposit payment"></div>
-        <p>Each traveller fills in their own questionnaire; the deposit for the whole group can be sent in one payment under this reference. If the person who made the booking has already paid for your group, do not send it again. We will get back to you within 24 hours with a confirmation and the tour contract. The deposit is fully refundable until the date shown for your departure (20 Sep 2026 for October 2026, 1 Feb 2027 for March 2027). Any questions, call +420 702 967 187.</p>
+        <p>Each traveller fills in their own questionnaire; the deposit for the whole group can be sent in one payment under this reference. If the person who made the booking has already paid for your group, do not send it again. We will get back to you within 24 hours with a confirmation and the tour contract. The deposit is fully refundable until 1 Feb 2027. Any questions, call +420 702 967 187.</p>
         <button type="button" id="lead-another" class="btn btn--secondary btn--block">Fill in the questionnaire for another traveller</button>
       </div>
     </div>
