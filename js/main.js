@@ -387,6 +387,34 @@
     document.getElementById(id).textContent = msg || '';
   }
 
+  /* Formulář přihlášky je na telefonu dlouhý přes několik obrazovek.
+     Bez tohohle klikne člověk dole na odeslat, chyba se vypíše někde
+     nahoře mimo výhled a zvenčí to vypadá, že tlačítko nefunguje. */
+  function naPrvniChybu(form) {
+    var vsechny = form.querySelectorAll('.form-error');
+    var chyba = null;
+    for (var i = 0; i < vsechny.length; i++) {
+      if (vsechny[i].textContent.trim()) { chyba = vsechny[i]; break; }
+    }
+    if (!chyba) return;
+
+    var pole = chyba.parentNode.querySelector('input, select, textarea');
+    var cil = pole || chyba;
+    try {
+      cil.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
+    } catch (err) {
+      cil.scrollIntoView();
+    }
+
+    /* Kurzor nastavujeme až po doskrolování a jen u psacích polí;
+       u přepínačů by focus jen zmátl a klávesnice by nebyla k ničemu. */
+    if (pole && pole.type !== 'radio' && pole.type !== 'checkbox') {
+      setTimeout(function () {
+        try { pole.focus({ preventScroll: true }); } catch (err) { pole.focus(); }
+      }, reduced ? 0 : 340);
+    }
+  }
+
   /* popisek vybraného termínu, ať ho vidí i na potvrzovací obrazovce */
   function terminLabel() {
     var el = document.querySelector('input[name="termin"]:checked');
@@ -441,7 +469,7 @@
     if (!poust) { setErr('err-poust', T.errPoust); ok = false; } else setErr('err-poust');
     if (!gdpr) { setErr('err-gdpr', T.errGdpr); ok = false; } else setErr('err-gdpr');
     if (!podminky) { setErr('err-podminky', T.errPodminky); ok = false; } else setErr('err-podminky');
-    if (!ok) return;
+    if (!ok) { naPrvniChybu(leadForm); return; }
 
     var parts = name.trim().split(/\s+/);
     var prijmeni = parts.length > 1 ? parts.pop() : null;
@@ -539,7 +567,7 @@
     if (!phone.trim()) { setErr('err-d-phone', T.errPhone); ok = false; } else setErr('err-d-phone');
     if (email.trim() && !EMAIL_RE.test(email)) { setErr('err-d-email', T.errDEmail); ok = false; } else setErr('err-d-email');
     if (!gdpr) { setErr('err-d-gdpr', T.errGdpr); ok = false; } else setErr('err-d-gdpr');
-    if (!ok) return;
+    if (!ok) { naPrvniChybu(dotazForm); return; }
 
     var dotazBtnText = submitBtn.textContent;
     submitBtn.disabled = true;

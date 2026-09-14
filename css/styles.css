@@ -109,7 +109,12 @@ h1, h2, h3, p { margin: 0; }
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* 44 px je nejmenší plocha, kterou se dá spolehlivě trefit prstem
+     (doporučení Apple i Google); drtivá většina návštěvníků chodí z telefonu */
+  min-height: 44px;
   box-sizing: border-box;
   text-decoration: none;
   font-family: var(--cd-font-display);
@@ -144,7 +149,12 @@ h1, h2, h3, p { margin: 0; }
 .btn--secondary:focus-visible { outline: 2px solid var(--cd-hlubina); outline-offset: 2px; }
 
 .btn--lg { font-size: 16px; padding: 16px 32px; }
-.btn--block { width: 100%; font-size: 16px; padding: 16px 32px; }
+
+/* Tlačítko přes celou šířku musí umět zalomit text. Bez toho si dlouhý
+   popisek (hlavně v ukrajinštině) vynutí min-content šířku celého sloupce
+   a odsune obsah mimo obrazovku — na úzkých telefonech se tak ořízly
+   platební údaje na potvrzovací stránce. */
+.btn--block { width: 100%; font-size: 16px; padding: 16px 32px; white-space: normal; }
 
 .card {
   background: var(--cd-bila);
@@ -332,6 +342,9 @@ textarea.input { resize: vertical; }
   border: 1px solid rgba(110, 101, 92, 0.5);
   border-radius: var(--cd-radius);
   padding: 9px 10px;
+  /* hlavní ovládací prvek navigace na telefonu, musí mít plných 44 px */
+  min-width: 44px;
+  min-height: 44px;
   cursor: pointer;
   color: inherit;
   display: grid;
@@ -1467,6 +1480,9 @@ textarea.input { resize: vertical; }
 
 .final__sent {
   display: grid;
+  /* minmax(0, 1fr) drží sloupec v šířce rodiče, i kdyby se do něj dostal
+     prvek, který se neumí zmenšit; jinak potvrzení uteče mimo obrazovku */
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   justify-items: start;
 }
@@ -1715,6 +1731,53 @@ textarea.input { resize: vertical; }
 
 @media (max-width: 767px) {
   .to-top { bottom: 78px; }
+}
+
+/* ---------- dotykové ovládání ---------- */
+
+/* Na dotykovém displeji zvětšujeme plochu odkazů a přepínačů na 44 px.
+   Pravidla schválně visí na (pointer: coarse), ne na šířce okna: myš
+   trefí i malý cíl, takže na počítači zůstává rozvržení beze změny. */
+@media (pointer: coarse) {
+
+  /* volby ve formuláři — na přihlášce jich je přes dvacet a proklikává
+     se přes ně každý zájemce */
+  .choices label { min-height: 44px; }
+
+  /* souhlasy: na úzkém displeji se text zalomí na několik řádků sám,
+     na širším by jinak zůstal proužek vysoký 23 px */
+  .field__consent { min-height: 44px; }
+
+  /* jazyky v hlavičce i v rozbaleném menu */
+  .nav__langs a:not(.btn),
+  .nav__langs .is-active,
+  .nav__menu-langs a,
+  .nav__menu-langs .is-active {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* logo slouží i jako návrat na začátek stránky */
+  .nav__logo { min-height: 44px; }
+
+  .apply__back { min-height: 44px; }
+
+  /* odkazy v patičce: kontakt, sítě a povinné dokumenty */
+  .footer__docs a,
+  .footer__contact > a,
+  .footer__social a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* patička by jinak kvůli vyšším odkazům zbytečně narostla */
+  .footer__contact { gap: 0; }
+  .footer__docs { gap: 0 14px; }
+  .footer__social { gap: 0 14px; }
 }
 
 /* ---------- pohyb ---------- */
