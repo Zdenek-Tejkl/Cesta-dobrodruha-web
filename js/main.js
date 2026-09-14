@@ -109,6 +109,37 @@
   var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- měření kliků (vlastní události Vercel Analytics) ---------- */
+
+  /* fronta pro případ, že se insights script ještě nestihl načíst;
+     stejný stub, jaký používá balíček @vercel/analytics */
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+
+  /* Posílá jen název události a jazyk stránky, žádné osobní údaje.
+     Měření nesmí nikdy shodit stránku, proto je celé v try/catch. */
+  function sleduj(nazev, detail) {
+    try {
+      var data = { jazyk: LANG };
+      if (detail) {
+        for (var k in detail) {
+          if (Object.prototype.hasOwnProperty.call(detail, k) && detail[k]) data[k] = String(detail[k]);
+        }
+      }
+      window.va('event', { name: nazev, data: data });
+    } catch (err) {}
+  }
+
+  /* Tlačítka se označují atributem data-track, ať je měření vidět přímo
+     v HTML a nikdo ho omylem nerozbije přejmenováním třídy. Nepovinný
+     data-track-info přidá k události jeden upřesňující údaj. */
+  document.addEventListener('click', function (e) {
+    var cil = e.target;
+    if (!cil || !cil.closest) return;
+    var el = cil.closest('[data-track]');
+    if (!el) return;
+    sleduj(el.getAttribute('data-track'), { info: el.getAttribute('data-track-info') });
+  });
+
   function isMobile() { return window.innerWidth < 768; }
   /* musí odpovídat breakpointu burger navigace v CSS */
   function isBurgerNav() { return window.innerWidth < 1024; }
@@ -376,6 +407,9 @@
 
   if (leadForm) leadForm.addEventListener('submit', function (e) {
     e.preventDefault();
+    /* rozdíl mezi pokusem a odeslanou přihláškou ukáže, kolik lidí
+       se zaseklo na validaci nebo jim odeslání spadlo */
+    sleduj('prihlaska-pokus');
     var name = document.getElementById('lead-name').value;
     var phone = document.getElementById('lead-phone').value;
     var email = document.getElementById('lead-email').value;
@@ -456,10 +490,12 @@
         }));
       } catch (err) {}
       showLeadSent(data.vs, data.zaloha_kc, pocet, terminText);
+      sleduj('prihlaska-odeslana', { termin: termin });
     }).catch(function () {
       submitBtn.disabled = false;
       submitBtn.textContent = leadBtnText;
       setErr('err-submit', T.errSubmit);
+      sleduj('prihlaska-chyba', { termin: termin });
     });
   });
 
@@ -489,6 +525,7 @@
 
   if (dotazForm) dotazForm.addEventListener('submit', function (e) {
     e.preventDefault();
+    sleduj('dotaz-pokus');
     var dotaz = document.getElementById('dotaz-text').value;
     var name = document.getElementById('dotaz-name').value;
     var phone = document.getElementById('dotaz-phone').value;
@@ -529,10 +566,12 @@
       if (!res.ok) throw new Error('http ' + res.status);
       try { localStorage.setItem('cd-maroko-dotaz', String(Date.now())); } catch (err) {}
       showDotazSent();
+      sleduj('dotaz-odeslan');
     }).catch(function () {
       submitBtn.disabled = false;
       submitBtn.textContent = dotazBtnText;
       setErr('err-d-submit', T.errSubmit);
+      sleduj('dotaz-chyba');
     });
   });
 
@@ -551,6 +590,7 @@
 
   if (pdfForm) pdfForm.addEventListener('submit', function (e) {
     e.preventDefault();
+    sleduj('pdf-pokus');
     var email = document.getElementById('pdf-email').value;
     if (!EMAIL_RE.test(email)) {
       pdfErr.textContent = T.errPdfEmail;
@@ -571,8 +611,10 @@
       if (!res.ok) throw new Error('http ' + res.status);
       try { localStorage.setItem('cd-maroko-pdf', email); } catch (err) {}
       showPdfSent();
+      sleduj('pdf-odeslan');
     }).catch(function () {
       pdfErr.textContent = T.errPdfSubmit;
+      sleduj('pdf-chyba');
     });
   });
 
