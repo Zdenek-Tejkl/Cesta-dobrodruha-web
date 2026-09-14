@@ -1,0 +1,60 @@
+# Udržuje databázi vzhůru a hlídá, že odpovídá.
+#
+# Supabase na free tieru uspí projekt zhruba po týdnu bez jediného dotazu.
+# Uspaná databáze znamená, že formuláře na webu tiše selhávají: návštěvník
+# vidí „Odeslání se nepovedlo" a nikde po tom nezůstane stopa. Přesně to se
+# stalo na začátku září 2026.
+#
+# Tenhle job se každý den zeptá na jeden řádek z tabulky vypravy. To je
+# skutečný dotaz do Postgresu, takže počítadlo nečinnosti se resetuje.
+# Když databáze neodpoví, job spadne a GitHub pošle upozornění, je to tedy
+# zároveň hlídač, ne jen budík.
+#
+# Klíč níže je publishable (anon) klíč, který je stejně veřejně v js/main.js;
+# nepatří mezi tajemství a nemusí být v Secrets.
+
+name: Keep-alive databáze
+
+on:
+  schedule:
+    # každý den v 6:17 UTC; nekulatá minuta, ať to nespadne do špičky GitHubu
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dotaz do Supabase
+        env:
+          SUPABASE_URL: https://xpikyrtjmueeyqrpfoox.supabase.co
+          SUPABASE_KEY: sb_publishable_l9O6G5ldcwcYixVOn1Xq9w_kJjdgCsg
+        run: |
+          set -uo pipefail
+
+          kod=000
+          # tři pokusy, ať job nespadne kvůli chvilkovému výpadku sítě
+          for pokus in 1 2 3; do
+            kod=$(curl -sS -o /tmp/odpoved -w '%{http_code}' --max-time 30 \
+              "$SUPABASE_URL/rest/v1/vypravy?select=slug&limit=1" \
+              -H "apikey: $SUPABASE_KEY" \
+              -H "Authorization: Bearer $SUPABASE_KEY" || echo "000")
+
+            if [ "$kod" = "200" ]; then
+              echo "Databáze odpovídá (HTTP 200): $(cat /tmp/odpoved)"
+              exit 0
+            fi
+
+            echo "Pokus $pokus selhal (HTTP $kod), zkusím to znovu za 20 s."
+            sleep 20
+          done
+
+          echo
+          echo "Databáze neodpověděla ani na třetí pokus (HTTP $kod)."
+          echo "Odpověď serveru:"
+          cat /tmp/odpoved || true
+          echo
+          echo "Nejčastější příčina: projekt je uspaný. Probudit ho jde na"
+          echo "https://supabase.com/dashboard/project/xpikyrtjmueeyqrpfoox"
+          echo "Dokud běží uspaný, formuláře na webu tiše selhávají."
+          exit 1
