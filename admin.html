@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administrace | Cesta dobrodruha</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 12'%3E%3Cg fill='none' stroke='%23B4501E' stroke-width='2.4'%3E%3Ccircle cx='5' cy='6' r='3.1'/%3E%3Cpath d='M8.1 6 H29' stroke-linecap='round'/%3E%3Cpath d='M25.5 2.5 30.5 6 25.5 9.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin">
+
+<header class="admin-hlava">
+  <div class="admin-hlava__inner">
+    <a href="index.html" class="admin-logo" aria-label="Cesta dobrodruha, zpět na web">
+      <svg width="34" height="12" viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="5" cy="6" r="3.1"></circle><path d="M8.1 6 H29" stroke-linecap="round"></path><path d="M25.5 2.5 30.5 6 25.5 9.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span>ADMINISTRACE</span>
+    </a>
+    <div class="admin-hlava__vpravo">
+      <span id="admin-kdo" class="admin-kdo"></span>
+      <button type="button" id="admin-odhlasit" class="admin-btn admin-btn--tise">Odhlásit</button>
+    </div>
+  </div>
+</header>
+
+<main id="obsah" class="admin-telo">
+
+  <p id="admin-chyba" class="admin-hlaska admin-hlaska--chyba" role="alert" hidden></p>
+  <p id="admin-stav" class="admin-hlaska" role="status" hidden></p>
+
+  <!-- přihlášení -->
+  <section id="admin-login" class="admin-login" hidden>
+    <h1 class="admin-nadpis">Přihlášení</h1>
+    <p class="admin-popis">Přehled přihlášek, dotazů a zájemců o program.</p>
+    <form id="login-form" class="admin-form" autocomplete="on">
+      <label class="admin-pole">
+        <span class="admin-pole__popisek">E-mail</span>
+        <input type="email" id="login-email" name="email" autocomplete="username" required>
+      </label>
+      <label class="admin-pole">
+        <span class="admin-pole__popisek">Heslo</span>
+        <input type="password" id="login-heslo" name="password" autocomplete="current-password" required>
+      </label>
+      <button type="submit" id="login-submit" class="admin-btn admin-btn--hlavni">Přihlásit se</button>
+    </form>
+  </section>
+
+  <!-- data -->
+  <section id="admin-obsah" hidden>
+    <div class="admin-lista">
+      <div class="admin-zalozky" role="tablist" aria-label="Typ záznamů">
+        <button type="button" class="admin-zalozka is-active" data-zalozka="prihlasky" role="tab" aria-selected="true">
+          Přihlášky <span id="pocet-prihlasky" class="admin-pocet">0</span>
+        </button>
+        <button type="button" class="admin-zalozka" data-zalozka="dotazy" role="tab" aria-selected="false">
+          Dotazy <span id="pocet-dotazy" class="admin-pocet">0</span>
+        </button>
+        <button type="button" class="admin-zalozka" data-zalozka="zajemci_pdf" role="tab" aria-selected="false">
+          Program <span id="pocet-pdf" class="admin-pocet">0</span>
+        </button>
+      </div>
+      <div class="admin-nastroje">
+        <label class="admin-hledani">
+          <span class="sr-only">Hledat v záznamech</span>
+          <input type="search" id="admin-hledani" placeholder="Hledat jméno, e-mail, VS…">
+        </label>
+        <button type="button" id="admin-obnovit" class="admin-btn admin-btn--tise">Obnovit</button>
+      </div>
+    </div>
+
+    <div id="admin-seznam" class="admin-seznam"></div>
+  </section>
+
+</main>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

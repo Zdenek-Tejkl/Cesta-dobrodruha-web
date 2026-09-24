@@ -1,0 +1,377 @@
+/* Administrace. Staví na proměnných z styles.css, ale je to pracovní
+   nástroj, ne výkladní skříň: hustší sazba, žádné animace, na telefonu
+   karty pod sebou. Skoro všechno se otevírá na mobilu, tak je to řešené
+   mobilem napřed. */
+
+.admin {
+  background: var(--cd-pisek);
+  color: var(--cd-uhel);
+  font-family: var(--cd-font-display);
+}
+
+/* ---------- hlavička ---------- */
+
+.admin-hlava {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--cd-uhel);
+  color: var(--cd-pisek);
+}
+
+.admin-hlava__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
+  font-stretch: 125%;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.admin-hlava__vpravo {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-kdo {
+  font-family: var(--cd-font-mono);
+  font-size: 12.5px;
+  color: rgba(243, 237, 226, 0.7);
+  /* na úzkém displeji se dlouhý e-mail nesmí roztáhnout přes celou lištu */
+  max-width: 42vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- tělo ---------- */
+
+.admin-telo {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 16px 64px;
+}
+
+.admin-nadpis {
+  font-family: var(--cd-font-display);
+  font-weight: 700;
+  font-stretch: 110%;
+  font-size: clamp(24px, 5vw, 32px);
+  margin: 8px 0 6px;
+}
+
+.admin-popis {
+  margin: 0 0 20px;
+  font-family: var(--cd-font-text);
+  font-size: 16px;
+  color: rgba(34, 30, 26, 0.75);
+}
+
+.admin-hlaska {
+  margin: 0 0 14px;
+  padding: 11px 14px;
+  border-radius: var(--cd-radius);
+  border: 1px solid rgba(110, 101, 92, 0.45);
+  background: var(--cd-bila);
+  font-size: 15px;
+}
+
+.admin-hlaska--chyba {
+  border-color: var(--cd-terakota);
+  color: var(--cd-terakota-tmava);
+}
+
+/* ---------- přihlášení ---------- */
+
+.admin-login { max-width: 380px; }
+
+.admin-form {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-pole {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-pole__popisek {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cd-kamen);
+}
+
+.admin-pole input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid rgba(110, 101, 92, 0.55);
+  border-radius: var(--cd-radius);
+  background: var(--cd-bila);
+  /* 16 px je minimum, pod kterým iOS při klepnutí do pole zoomuje */
+  font-size: 16px;
+  font-family: var(--cd-font-display);
+  color: var(--cd-uhel);
+}
+
+.admin-pole input:focus-visible {
+  outline: 2px solid var(--cd-hlubina);
+  outline-offset: 1px;
+}
+
+/* ---------- tlačítka ---------- */
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: var(--cd-radius);
+  font-family: var(--cd-font-display);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  background: var(--cd-bila);
+  color: var(--cd-uhel);
+  border-color: rgba(110, 101, 92, 0.55);
+  touch-action: manipulation;
+}
+
+.admin-btn:disabled { opacity: 0.55; cursor: default; }
+
+.admin-btn--hlavni {
+  background: var(--cd-terakota);
+  color: var(--cd-bila);
+  border-color: var(--cd-terakota);
+}
+
+.admin-btn--hlavni:hover { background: var(--cd-terakota-tmava); }
+
+.admin-btn--tise {
+  background: none;
+  color: inherit;
+  border-color: rgba(110, 101, 92, 0.6);
+  font-size: 14px;
+  padding: 8px 14px;
+}
+
+.admin-btn--male {
+  margin-top: 12px;
+  font-size: 14px;
+  padding: 9px 14px;
+}
+
+/* ---------- lišta se záložkami ---------- */
+
+.admin-lista {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.admin-zalozky {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.admin-zalozka {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 9px 14px;
+  border: 1px solid rgba(110, 101, 92, 0.5);
+  border-radius: var(--cd-radius);
+  background: none;
+  color: var(--cd-kamen);
+  font-family: var(--cd-font-display);
+  font-weight: 600;
+  font-size: 14.5px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.admin-zalozka.is-active {
+  background: var(--cd-uhel);
+  border-color: var(--cd-uhel);
+  color: var(--cd-pisek);
+}
+
+.admin-pocet {
+  font-family: var(--cd-font-mono);
+  font-size: 12px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(110, 101, 92, 0.22);
+}
+
+.admin-zalozka.is-active .admin-pocet { background: rgba(243, 237, 226, 0.25); }
+
+.admin-nastroje {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.admin-hledani { flex: 1 1 auto; min-width: 0; }
+
+.admin-hledani input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid rgba(110, 101, 92, 0.55);
+  border-radius: var(--cd-radius);
+  background: var(--cd-bila);
+  font-size: 16px;
+  font-family: var(--cd-font-display);
+  color: var(--cd-uhel);
+}
+
+/* ---------- karty záznamů ---------- */
+
+.admin-seznam {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-prazdno {
+  margin: 28px 0;
+  text-align: center;
+  color: var(--cd-kamen);
+  font-family: var(--cd-font-text);
+  font-size: 16.5px;
+}
+
+.zaznam {
+  background: var(--cd-bila);
+  border: 1px solid rgba(110, 101, 92, 0.42);
+  border-radius: var(--cd-radius);
+  padding: 15px 16px;
+}
+
+.zaznam--hotovo { background: rgba(255, 255, 255, 0.55); }
+
+.zaznam__hlava {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.zaznam__nazev {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  /* dlouhé jméno nebo e-mail nesmí roztáhnout kartu do strany */
+  overflow-wrap: anywhere;
+}
+
+.zaznam__znacky {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.znacka {
+  font-family: var(--cd-font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--cd-radius);
+  background: rgba(110, 101, 92, 0.16);
+  color: var(--cd-kamen);
+}
+
+.znacka--vs { background: var(--cd-hlubina); color: var(--cd-pisek); }
+.znacka--ceka { background: var(--cd-terakota); color: var(--cd-bila); }
+
+.zaznam__cas {
+  margin: 6px 0 0;
+  font-family: var(--cd-font-mono);
+  font-size: 12.5px;
+  color: var(--cd-kamen);
+}
+
+.zaznam__telo {
+  margin-top: 12px;
+  display: grid;
+  gap: 7px;
+}
+
+.zaznam__radek {
+  display: grid;
+  /* na telefonu popisek nad hodnotou, na širším vedle sebe */
+  grid-template-columns: 1fr;
+  gap: 1px;
+  padding-top: 7px;
+  border-top: 1px solid rgba(110, 101, 92, 0.2);
+}
+
+.zaznam__radek:first-child { border-top: none; padding-top: 0; }
+
+.zaznam__popisek {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cd-kamen);
+}
+
+.zaznam__hodnota {
+  font-family: var(--cd-font-text);
+  font-size: 16px;
+  overflow-wrap: anywhere;
+  /* víceřádkové odpovědi z formuláře si nesou vlastní zalomení */
+  white-space: pre-wrap;
+}
+
+.zaznam__odkaz {
+  color: var(--cd-hlubina);
+  /* kontakt se na telefonu vytáčí i píše přímo z karty */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.zaznam__radek--citlivy .zaznam__popisek { color: var(--cd-terakota-tmava); }
+
+@media (min-width: 620px) {
+  .admin-lista {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+  }
+
+  .zaznam__radek {
+    grid-template-columns: 180px 1fr;
+    gap: 12px;
+    align-items: baseline;
+  }
+
+  .zaznam__odkaz { min-height: 0; }
+}

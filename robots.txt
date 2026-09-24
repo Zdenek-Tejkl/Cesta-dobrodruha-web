@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Administrace není pro veřejnost ani pro vyhledávače. Data chrání
+# přihlášení a pravidla v databázi, tohle je jen navíc, aby se stránka
+# neobjevila ve výsledcích hledání.
+Disallow: /admin.html
