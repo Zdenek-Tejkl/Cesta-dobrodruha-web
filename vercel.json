@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/((?!rekonstrukce\\.html|assets/|admin|js/|css/).*)",
+      "destination": "/rekonstrukce.html",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     { "source": "/admin", "destination": "/admin.html" }
   ]
