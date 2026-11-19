@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/((?!rekonstrukce\\.html|assets/|js/|css/).*)",
+      "destination": "/rekonstrukce.html",
+      "permanent": false
+    }
+  ]
+}
