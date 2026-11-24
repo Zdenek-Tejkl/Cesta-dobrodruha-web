@@ -107,6 +107,34 @@
   var T = STR[LANG] || STR.cs;
 
   var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+  /* Ověření doručitelnosti e-mailu (překlep v doméně, testovací a jednorázové
+     schránky, doména bez pošty) před uložením. Při výpadku služby pustí dál. */
+  var STOP = {};
+  var EMAIL_HINT = {
+    cs: { typo: 'Nemysleli jste ', bad: 'Na tenhle e-mail se nedá doručit, zkontrolujte ho prosím.' },
+    sk: { typo: 'Nemysleli ste ', bad: 'Na tento e-mail sa nedá doručiť, skontrolujte ho prosím.' },
+    en: { typo: 'Did you mean ', bad: 'We cannot deliver to this e-mail, please check it.' },
+    uk: { typo: 'Можливо, ви мали на увазі ', bad: 'На цей e-mail не можна доставити лист, перевірте його.' }
+  };
+  function overeritEmail(email) {
+    if (!email) return Promise.resolve(null);
+    var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var t = ctrl ? setTimeout(function () { ctrl.abort(); }, 5000) : null;
+    return fetch(SUPABASE_URL + '/functions/v1/email-guard', {
+      method: 'POST',
+      headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email.trim() }),
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function (res) { return res.ok ? res.json() : null; })
+      .catch(function () { return null; })
+      .then(function (v) { if (t) clearTimeout(t); return v; });
+  }
+  function emailChyba(v) {
+    var h = EMAIL_HINT[LANG] || EMAIL_HINT.cs;
+    if (v.suggestion) return h.typo + v.suggestion + '?';
+    return LANG === 'cs' && v.message ? v.message : h.bad;
+  }
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- měření kliků (vlastní události Vercel Analytics) ---------- */
@@ -480,7 +508,16 @@
     submitBtn.textContent = T.sending;
     setErr('err-submit');
 
-    fetch(SUPABASE_URL + '/rest/v1/rpc/podat_prihlasku', {
+    overeritEmail(email).then(function (v) {
+      if (v && v.ok === false) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = leadBtnText;
+        setErr('err-email', emailChyba(v));
+        naPrvniChybu(leadForm);
+        sleduj('prihlaska-email-zamitnut', { duvod: v.reason });
+        throw STOP;
+      }
+      return fetch(SUPABASE_URL + '/rest/v1/rpc/podat_prihlasku', {
       method: 'POST',
       headers: {
         'apikey': SUPABASE_KEY,
@@ -507,6 +544,7 @@
         p_jazyky: jazyky || null,
         p_pocet_osob: pocet
       })
+    });
     }).then(function (res) {
       if (!res.ok) throw new Error('http ' + res.status);
       return res.json();
@@ -519,7 +557,8 @@
       } catch (err) {}
       showLeadSent(data.vs, data.zaloha_kc, pocet, terminText);
       sleduj('prihlaska-odeslana', { termin: termin });
-    }).catch(function () {
+    }).catch(function (err) {
+      if (err === STOP) return;
       submitBtn.disabled = false;
       submitBtn.textContent = leadBtnText;
       setErr('err-submit', T.errSubmit);
@@ -574,7 +613,16 @@
     submitBtn.textContent = T.sending;
     setErr('err-d-submit');
 
-    fetch(SUPABASE_URL + '/rest/v1/dotazy', {
+    overeritEmail(email.trim()).then(function (v) {
+      if (v && v.ok === false) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = dotazBtnText;
+        setErr('err-d-email', emailChyba(v));
+        naPrvniChybu(dotazForm);
+        sleduj('dotaz-email-zamitnut', { duvod: v.reason });
+        throw STOP;
+      }
+      return fetch(SUPABASE_URL + '/rest/v1/dotazy', {
       method: 'POST',
       headers: {
         'apikey': SUPABASE_KEY,
@@ -590,12 +638,14 @@
         dotaz: dotaz.trim(),
         souhlas_gdpr: gdpr
       })
+    });
     }).then(function (res) {
       if (!res.ok) throw new Error('http ' + res.status);
       try { localStorage.setItem('cd-maroko-dotaz', String(Date.now())); } catch (err) {}
       showDotazSent();
       sleduj('dotaz-odeslan');
-    }).catch(function () {
+    }).catch(function (err) {
+      if (err === STOP) return;
       submitBtn.disabled = false;
       submitBtn.textContent = dotazBtnText;
       setErr('err-d-submit', T.errSubmit);
