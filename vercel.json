@@ -1,5 +1,13 @@
 {
+  "redirects": [
+    {
+      "source": "/((?!admin|vystavba|css/|js/|assets/|robots\\.txt).*)",
+      "destination": "/vystavba",
+      "permanent": false
+    }
+  ],
   "rewrites": [
-    { "source": "/admin", "destination": "/admin.html" }
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/vystavba", "destination": "/vystavba.html" }
   ]
 }
